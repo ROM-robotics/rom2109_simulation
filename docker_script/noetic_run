@@ -4,6 +4,6 @@ docker run -it --network='host' \
 --env='DISPLAY' \
 --env='QT_X11_NO_MITSHM=1' \
 --volume='/tmp/.X11-unix:/tmp/.X11-unix:rw' \
---name kinetic romrobotics/kinetic_desktop:rom2109_simulation bash
+--name kinetic romrobotics/noetic_desktop:latest bash
 
 
