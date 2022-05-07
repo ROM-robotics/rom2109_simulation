@@ -23,7 +23,7 @@ $ sudo apt-get install ros-noetic-navigation\
 $ cd catkin_ws\
 $ catkin_make
 
-Now, we can install Evarobot ROS Noetic packages for PC.
+Now, we can install ROM2109 robot's ROS Noetic packages for PC.
 
 $ cd catkin_ws/src\
 $ git clone -b noetic-devel git@github.com:ROM-robotics/rom2109_simulation.git
