@@ -6,7 +6,7 @@ $ cd your_dir/catkin_ws/src
 $ sudo apt-get install ros-noetic-teleop-twist-keyboard
 
 #### install gazebo ros packages.
-$ sudo apt-get install ros-noetic-ros-control
+$ sudo apt-get install ros-noetic-ros-control \n
 $ sudo apt-get install ros-noetic-ros-controllers
 $ sudo apt-get install ros-noetic-gazebo-ros-pkgs
 
