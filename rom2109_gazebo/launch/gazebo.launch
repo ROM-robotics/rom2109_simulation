@@ -7,7 +7,7 @@
     <param name="robot_description" textfile="$(find rom2109_description)/urdf/rom2109_$(arg model)_gazebo.urdf" />
 
     <!-- Spawn the robot from parameter server into Gazebo -->
-    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model rom2109_tall" />
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model rom2109_bot" />
 
     <!-- start a robot_state_publisher -->
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
