@@ -1,4 +1,5 @@
 # rom2109 Autonomous Mobile Robot simulation
+<img src="/images/gazebo.png" width="173" height="100"/>
 
 $ cd your_dir/catkin_ws/src
 

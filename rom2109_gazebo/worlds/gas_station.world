@@ -86,7 +86,7 @@
       <elevation>0</elevation>
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
-    <model name='rom2109'>
+    <model name='rom2109_bot'>
       <link name='base_link'>
         <inertial>
           <pose>-0.003697 -0.000156 0.064108 0 -0 0</pose>
@@ -473,18 +473,18 @@
         <enable_wind>0</enable_wind>
         <kinematic>0</kinematic>
       </link>
-      <pose>0.707685 18.4184 0 0 -0 0</pose>
+      <pose>1.19099 12.3082 0 0 -0 0</pose>
     </model>
     <state world_name='default'>
-      <sim_time>32 119000000</sim_time>
-      <real_time>211 158904537</real_time>
-      <wall_time>1651843284 841737266</wall_time>
-      <iterations>32119</iterations>
+      <sim_time>7 514000000</sim_time>
+      <real_time>49 813331802</real_time>
+      <wall_time>1651934074 201685687</wall_time>
+      <iterations>7514</iterations>
       <model name='Gas Station'>
-        <pose>0.707685 18.4184 0 0 -0 0</pose>
+        <pose>1.19099 12.3082 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>0.707685 18.4184 0 0 -0 0</pose>
+          <pose>1.19099 12.3082 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -500,26 +500,26 @@
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <model name='rom2109'>
-        <pose>0.000595 0.001497 0.024054 0.000113 -2.1e-05 0.008235</pose>
+      <model name='rom2109_bot'>
+        <pose>0.002359 -2e-05 0.02405 -0.000802 -0 -0.011231</pose>
         <scale>1 1 1</scale>
         <link name='base_link'>
-          <pose>0.000595 0.001497 0.024054 0.000113 -2.1e-05 0.008235</pose>
-          <velocity>-0.000218 -0.000833 0.002568 0.024123 -0.008946 3.1e-05</velocity>
-          <acceleration>-0.180617 -4.44377 4.7766 1.03442 -1.06231 3.09711</acceleration>
-          <wrench>-1.05878 -26.0496 28.0007 0 -0 0</wrench>
+          <pose>0.002359 -2e-05 0.02405 -0.000802 -0 -0.011231</pose>
+          <velocity>0.000908 0.000717 0.00503 -0.02983 0.037752 -2e-06</velocity>
+          <acceleration>12.4359 -0.136835 9.65654 -1.63446 0.299383 -3.05908</acceleration>
+          <wrench>72.8997 -0.802133 56.6071 0 -0 0</wrench>
         </link>
         <link name='left_wheel'>
-          <pose>-0.000215 0.099823 0.050115 3.14153 -0.618726 -3.13332</pose>
-          <velocity>-0.000447 -0.001341 0.005073 0.026755 -0.00892 1.1e-05</velocity>
-          <acceleration>-0.094901 -2.55919 10.195 0.555897 -1.10449 -3.04539</acceleration>
-          <wrench>-0.273561 -7.37713 29.388 0 -0 0</wrench>
+          <pose>0.003464 0.098327 0.050021 -0.000803 0.06173 -0.011281</pose>
+          <velocity>0.001874 0.001492 0.002056 -0.029827 0.037754 -2e-06</velocity>
+          <acceleration>7.01482 -0.077268 9.13441 -2.87086 0.039061 -3.0436</acceleration>
+          <wrench>20.2209 -0.222733 26.3308 0 -0 0</wrench>
         </link>
         <link name='right_wheel'>
-          <pose>0.001404 -0.096835 0.050094 3.14143 -0.618311 -3.13327</pose>
-          <velocity>-0.000446 -0.001354 7.8e-05 0.02703 -0.008905 3.9e-05</velocity>
-          <acceleration>-0.10451 -2.46459 -0.637469 2.25774 -1.22307 2.90685</acceleration>
-          <wrench>-0.301262 -7.10442 -1.83757 0 -0 0</wrench>
+          <pose>0.001255 -0.098326 0.050179 -0.000802 0.024282 -0.011251</pose>
+          <velocity>0.00188 0.001497 0.008005 -0.029868 0.037754 -1.4e-05</velocity>
+          <acceleration>7.03691 -0.076584 9.14101 -2.87768 0.052644 -3.07582</acceleration>
+          <wrench>20.2846 -0.220762 26.3499 0 -0 0</wrench>
         </link>
       </model>
       <light name='sun'>
@@ -528,7 +528,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose>0.52033 -12.1573 5.14508 0 0.383641 1.3162</pose>
+        <pose>8.89248 -8.95146 4.35188 0 0.567643 2.0442</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
