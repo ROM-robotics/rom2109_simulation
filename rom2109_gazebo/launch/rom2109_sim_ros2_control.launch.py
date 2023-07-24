@@ -28,7 +28,7 @@ def generate_launch_description():
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
-        arguments=['-d', os.path.join(gazebo_pkg, 'rviz2', 'display.rviz')],
+        arguments=['-d', os.path.join(gazebo_pkg, 'rviz2', 'nav2_default_view.rviz')],
         condition=IfCondition(LaunchConfiguration('open_rviz'))
     )
 
@@ -63,48 +63,17 @@ def generate_launch_description():
         output='screen'
     )
 
-    diff_drive_controller = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["diff_cont"],
-    )
-    delayed_diff_drive_controller = RegisterEventHandler(
-        event_handler=OnProcessStart(
-            target_action=spawn_robot_node,
-            on_start=[diff_drive_controller],
-        )
-    )
-
-    joint_broadcaster = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["joint_broad"],
-    )
-    delayed_joint_broadcaster = RegisterEventHandler(
-        event_handler=OnProcessStart(
-            target_action=spawn_robot_node,
-            on_start=[joint_broadcaster],
-        )
-    )
-    
-    joystick_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([os.path.join(joy_pkg, 'launch', 'joystick.launch.py')]),
-        launch_arguments={'use_sim_time': 'true'}.items(),
-        #condition=IfCondition('use_joystick')
-    )
 
     return LaunchDescription(
         [
             DeclareLaunchArgument('open_rviz', default_value='true', description='Open RViz.'),
-            DeclareLaunchArgument('use_joystick', default_value='true', description='JoyStick.'),
+            DeclareLaunchArgument('use_joystick', default_value='false', description='JoyStick.'),
             DeclareLaunchArgument('use_sim_time', default_value='true', description='Sim Time'),
             bot,
             gazebo_launch,
             rviz_node,
             spawn_robot_node,
-            joystick_launch,
-            delayed_diff_drive_controller,
-            delayed_joint_broadcaster,
+
             
         ]
     )
