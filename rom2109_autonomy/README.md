@@ -1,11 +1,11 @@
 ### rom2109_autonomy
 
-clone to your ROS2 workspace<br>
+clone to your ROS2 workspace
 ```
-$ git clone git@github.com:BehaviorTree/BehaviorTree.CPP.git <br>
-$ colcon build <br>
+$ git clone git@github.com:BehaviorTree/BehaviorTree.CPP.git
+$ colcon build 
 
-$ros2 pkg create test --build--type ament_cmake --dependencies behaviortree_cpp rclcpp <br>
+$ros2 pkg create test --build--type ament_cmake --dependencies behaviortree_cpp rclcpp 
 $ colcon build
 ```
 
