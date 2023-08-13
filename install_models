@@ -6,7 +6,7 @@ then
 	echo "models Directory exists."
 	rm -rf ~/.gazebo/models/rom2109*
 else
-	mkdir ~/.gazebo/models
+	mkdir -p ~/.gazebo/models
 fi
 cp -r ./models/* ~/.gazebo/models
 echo "models Copy finished!"
@@ -22,3 +22,5 @@ sed -i "s|/home/rom|$name|" ./rom2109_description/urdf/urdf.urdf
 rm ./rom2109_gazebo/worlds/cafe.world
 echo "Deleting rom2109_gazebo/worlds/cafe.world"
 echo "OK"
+
+echo "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp" >> ~/.bashrc
