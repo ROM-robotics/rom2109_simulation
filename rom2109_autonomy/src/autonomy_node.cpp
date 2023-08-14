@@ -1,4 +1,8 @@
 #include "autonomy_node.h"
+#include "behaviortree_cpp_v3/bt_factory.h"
+#include "behaviortree_cpp_v3/loggers/bt_zmq_publisher.h"
+#include "behaviortree_cpp_v3/xml_parsing.h"
+#include "behaviortree_cpp_v3/bt_parser.h"
 
 using namespace std::chrono_literals;
 
@@ -43,12 +47,20 @@ void AutonomyNode::create_behavior_tree()
 
   RCLCPP_INFO(get_logger(), bt_xml_dir.c_str());
 
+  //auto tree = factory.createTreeFromFile(bt_xml_dir + "/tree.xml");
   tree_ = factory.createTreeFromFile(bt_xml_dir + "/tree.xml");
   RCLCPP_INFO(get_logger(), "3");
 
+
   // added by ko su san
+  /*
+  std::cout << "----------- XML file  ----------\n"
+            << BT::WriteTreeToXML(tree_, true, false)
+            << "--------------------------------\n";
+            */
   //BT::Groot2Publisher publisher(tree);
-  //std::string xml_models = BT::writeTreeNodesModelXML(factory);
+  std::string xml_models = BT::writeTreeNodesModelXML(factory);
+  BT::PublisherZMQ publisher_zmq(tree_);
 }
 
 void AutonomyNode::update_behavior_tree()

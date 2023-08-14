@@ -30,6 +30,7 @@ set(TARGET_DEPENDS
   rclcpp
   rclcpp_action
   nav2_msgs
+  std_msgs
   behaviortree_cpp_v3
   yaml-cpp
   tf2
@@ -41,8 +42,12 @@ add_executable(autonomy_node src/autonomy_node.cpp ${BEHAVIOR_SOURCES})
 ament_target_dependencies(autonomy_node ${TARGET_DEPENDS})
 target_link_libraries(autonomy_node ${YAML_CPP_LIBRARIES})
 
+add_executable(simple_bt src/simple.cpp src/crossdoor_nodes.cpp)
+ament_target_dependencies(simple_bt ${TARGET_DEPENDS})
+
 install(TARGETS
   autonomy_node
+  simple_bt
   DESTINATION lib/${PROJECT_NAME}
 )
 
