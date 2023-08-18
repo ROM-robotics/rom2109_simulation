@@ -11,6 +11,8 @@ Panels:
         - /Odometry1
         - /Odometry1/Shape1
         - /Odometry1/Covariance1
+        - /Slowdown1
+        - /Slowdown2
       Splitter Ratio: 0.5833333134651184
     Tree Height: 514
   - Class: rviz_common/Selection
@@ -692,6 +694,32 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /diff_cont/odom
       Value: false
+    - Alpha: 1
+      Class: rviz_default_plugins/Polygon
+      Color: 28; 113; 216
+      Enabled: true
+      Name: Slowdown
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /polygon_slowdown
+      Value: true
+    - Alpha: 1
+      Class: rviz_default_plugins/Polygon
+      Color: 246; 211; 45
+      Enabled: true
+      Name: Slowdown
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /polygon_stop
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48

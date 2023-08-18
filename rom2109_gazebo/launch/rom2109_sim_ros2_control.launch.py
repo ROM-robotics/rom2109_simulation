@@ -72,7 +72,7 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
-            DeclareLaunchArgument('open_rviz', default_value='false', description='Open RViz.'),
+            DeclareLaunchArgument('open_rviz', default_value='true', description='Open RViz.'),
             DeclareLaunchArgument('use_joystick', default_value='true', description='JoyStick.'),
             DeclareLaunchArgument('use_sim_time', default_value='true', description='Sim Time'),
             bot,
