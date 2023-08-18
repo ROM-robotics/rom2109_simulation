@@ -18,7 +18,7 @@ windows:
       layout: 0a91,122x31,0,0{61x31,0,0,0,60x31,62,0,1}
       panes:
         - clear; source ~/.bashrc; sleep 10; ros2 launch rom2109_gazebo controller_spawner.launch.py
-        - clear; source ~/.bashrc; echo "Hello"
+        - clear; source ~/.bashrc; sleep 10; ros2 launch rom2109_description rviz.launch.py open_rviz:=true
   - Localization: 
       root: ~/
       panes:
