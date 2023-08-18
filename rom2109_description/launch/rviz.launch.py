@@ -10,7 +10,7 @@ from launch.substitutions import LaunchConfiguration
 def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time')
     
-    gazebo_pkg = get_package_share_directory('rom2109_description')
+    gazebo_pkg = get_package_share_directory('rom2109_gazebo')
     
     rviz_node = Node(
         package='rviz2',
