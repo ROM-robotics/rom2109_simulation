@@ -30,4 +30,5 @@ windows:
   - BehaviorTree: 
       root: ~/
       panes:
-        - clear; source ~/.bashrc; sleep 35; ros2 launch rom2109_autonomy autonomy.launch.py
+        - clear; source ~/.bashrc; sleep 30; ros2 launch rom2109_autonomy autonomy.launch.py
+        - clear; source ~/.bashrc; ros2 run rom_markers deepblue
