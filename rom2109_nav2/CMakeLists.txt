@@ -38,6 +38,7 @@ install(DIRECTORY
 	launch
   config
   maps
+  trees
 	DESTINATION share/${PROJECT_NAME}
 )
 ament_package()
