@@ -1,0 +1,1 @@
+ros2 node info /behavior_server | grep cmd

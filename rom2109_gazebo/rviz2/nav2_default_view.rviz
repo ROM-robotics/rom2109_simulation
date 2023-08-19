@@ -9,8 +9,6 @@ Panels:
         - /RobotModel1/Mass Properties1
         - /Map1/Update Topic1
         - /TF1/Frames1
-        - /deepblue_logo1
-        - /deepblue_logo1/Status1
         - /deepblue_logo1/Topic1
         - /robot_logo1
       Splitter Ratio: 0.5
@@ -32,7 +30,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: ""
+    SyncSource: LaserScan
 Visualization Manager:
   Class: ""
   Displays:
@@ -72,6 +70,54 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
+        base_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera_link_optical:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        left_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lidar:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        plate1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        plate2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        plate3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
       Mass Properties:
         Inertia: false
         Mass: false
@@ -322,13 +368,54 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
+        base_footprint:
+          Value: true
+        base_link:
+          Value: true
+        camera:
+          Value: true
+        camera_link_optical:
+          Value: true
+        left_wheel:
+          Value: true
+        lidar:
+          Value: true
+        map:
+          Value: true
+        odom:
+          Value: true
+        plate1:
+          Value: true
+        plate2:
+          Value: true
+        plate3:
+          Value: true
+        right_wheel:
+          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: false
       Tree:
-        {}
+        map:
+          odom:
+            base_footprint:
+              base_link:
+                left_wheel:
+                  {}
+                plate1:
+                  camera:
+                    camera_link_optical:
+                      {}
+                  lidar:
+                    {}
+                plate2:
+                  {}
+                plate3:
+                  {}
+                right_wheel:
+                  {}
       Update Interval: 0
       Value: true
     - Angle Tolerance: 0.10000000149011612
@@ -407,7 +494,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /global_costmap/published_footprint
+        Value: /polygon_slowdown
       Value: true
     - Alpha: 1
       Class: rviz_default_plugins/Polygon
@@ -420,7 +507,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /global_costmap/published_footprint
+        Value: /polygon_stop
       Value: true
     - Class: rviz_default_plugins/Marker
       Enabled: true
@@ -494,25 +581,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 25.96885108947754
+      Distance: 2.6010024547576904
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.7475160956382751
-        Y: -0.23126623034477234
-        Z: 0.16255241632461548
+        X: 1.1736955642700195
+        Y: -0.7662028670310974
+        Z: 0.39403024315834045
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.9297966957092285
+      Pitch: 1.4197962284088135
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.3703974485397339
+      Yaw: 6.083584785461426
     Saved: ~
 Window Geometry:
   Displays:
