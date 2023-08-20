@@ -105,6 +105,7 @@ def generate_launch_description():
                 respawn_delay=2.0,
                 parameters=[configured_params],
                 arguments=['--ros-args', '--log-level', log_level],
+                remappings=remappings
                 ),
             Node(
                 package='nav2_smoother',
@@ -115,7 +116,8 @@ def generate_launch_description():
                 respawn_delay=2.0,
                 parameters=[configured_params],
                 arguments=['--ros-args', '--log-level', log_level],
-                remappings=remappings),
+                remappings=remappings
+                ),
             Node(
                 package='nav2_planner',
                 executable='planner_server',
@@ -125,7 +127,8 @@ def generate_launch_description():
                 respawn_delay=2.0,
                 parameters=[configured_params],
                 arguments=['--ros-args', '--log-level', log_level],
-                remappings=remappings),
+                remappings=remappings
+                ),
             Node(
                 package='nav2_behaviors',
                 executable='behavior_server',
@@ -135,7 +138,7 @@ def generate_launch_description():
                 respawn_delay=2.0,
                 parameters=[configured_params],
                 arguments=['--ros-args', '--log-level', log_level],
-                #remappings=remappings
+                remappings=remappings
                 ),
             Node(
                 package='nav2_bt_navigator',
@@ -146,7 +149,8 @@ def generate_launch_description():
                 respawn_delay=2.0,
                 parameters=[configured_params],
                 arguments=['--ros-args', '--log-level', log_level],
-                remappings=remappings),
+                remappings=remappings
+                ),
             Node(
                 package='nav2_waypoint_follower',
                 executable='waypoint_follower',
@@ -156,7 +160,8 @@ def generate_launch_description():
                 respawn_delay=2.0,
                 parameters=[configured_params],
                 arguments=['--ros-args', '--log-level', log_level],
-                remappings=remappings),
+                remappings=remappings
+                ),
             Node(
                 package='nav2_velocity_smoother',
                 executable='velocity_smoother',
@@ -166,8 +171,8 @@ def generate_launch_description():
                 respawn_delay=2.0,
                 parameters=[configured_params],
                 arguments=['--ros-args', '--log-level', log_level],
-                remappings=remappings +
-                        [('cmd_vel', 'cmd_vel_nav'), ('cmd_vel_smoothed', 'cmd_vel')]),
+                remappings=remappings
+                ),
             Node(
                 package='nav2_collision_monitor',
                 executable='collision_monitor',
@@ -177,7 +182,8 @@ def generate_launch_description():
                 respawn_delay=2.0,
                 parameters=[configured_params],
                 arguments=['--ros-args', '--log-level', log_level],
-                remappings=remappings+ [('cmd_vel', 'cmd_vel_collision')]),
+                remappings=remappings
+                ),
             Node(
                 package='nav2_lifecycle_manager',
                 executable='lifecycle_manager',
@@ -199,6 +205,7 @@ def generate_launch_description():
                 plugin='nav2_controller::ControllerServer',
                 name='controller_server',
                 parameters=[configured_params],
+                remappings=remappings
                 ),
             ComposableNode(
                 package='nav2_smoother',
@@ -217,14 +224,15 @@ def generate_launch_description():
                 plugin='behavior_server::BehaviorServer',
                 name='behavior_server',
                 parameters=[configured_params],
-                #remappings=remappings
+                remappings=remappings
                 ),
             ComposableNode(
                 package='nav2_bt_navigator',
                 plugin='nav2_bt_navigator::BtNavigator',
                 name='bt_navigator',
                 parameters=[configured_params],
-                remappings=remappings),
+                remappings=remappings
+                ),
             ComposableNode(
                 package='nav2_waypoint_follower',
                 plugin='nav2_waypoint_follower::WaypointFollower',
@@ -236,15 +244,15 @@ def generate_launch_description():
                 plugin='nav2_velocity_smoother::VelocitySmoother',
                 name='velocity_smoother',
                 parameters=[configured_params],
-                remappings=remappings +
-                [('cmd_vel', 'cmd_vel_nav'), ('cmd_vel_smoothed', 'cmd_vel')]),
+                remappings=remappings
+                ),
             ComposableNode(
                 package='nav2_collision_monitor',
                 plugin='nav2_collision_monitor::CollisionMonitor',
                 name='collision_monitor',
                 parameters=[configured_params],
-                remappings=remappings +
-                [('cmd_vel', 'cmd_vel_collision')]),
+                remappings=remappings
+                ),
             ComposableNode(
                 package='nav2_lifecycle_manager',
                 plugin='nav2_lifecycle_manager::LifecycleManager',

@@ -10,7 +10,6 @@ Panels:
         - /Map1/Update Topic1
         - /TF1/Frames1
         - /deepblue_logo1/Topic1
-        - /robot_logo1
       Splitter Ratio: 0.5
     Tree Height: 719
   - Class: rviz_common/Selection
@@ -371,25 +370,25 @@ Visualization Manager:
         base_footprint:
           Value: true
         base_link:
-          Value: true
+          Value: false
         camera:
-          Value: true
+          Value: false
         camera_link_optical:
-          Value: true
+          Value: false
         left_wheel:
           Value: true
         lidar:
-          Value: true
+          Value: false
         map:
-          Value: true
+          Value: false
         odom:
           Value: true
         plate1:
-          Value: true
+          Value: false
         plate2:
-          Value: true
+          Value: false
         plate3:
-          Value: true
+          Value: false
         right_wheel:
           Value: true
       Marker Scale: 1
@@ -524,7 +523,7 @@ Visualization Manager:
       Value: true
     - Class: rviz_default_plugins/Marker
       Enabled: true
-      Name: robot_logo
+      Name: robot_logo_r
       Namespaces:
         {}
       Topic:
@@ -533,7 +532,33 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /bee_marker
+        Value: /r_marker
+      Value: true
+    - Class: rviz_default_plugins/Marker
+      Enabled: true
+      Name: robot_logo_g
+      Namespaces:
+        {}
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /g_marker
+      Value: true
+    - Class: rviz_default_plugins/Marker
+      Enabled: true
+      Name: robot_logo_b
+      Namespaces:
+        {}
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /b_marker
       Value: true
   Enabled: true
   Global Options:
@@ -581,25 +606,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 2.6010024547576904
+      Distance: 4.4822096824646
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 1.1736955642700195
-        Y: -0.7662028670310974
-        Z: 0.39403024315834045
+        X: 1.1226568222045898
+        Y: 0.8825304508209229
+        Z: 1.2960079908370972
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.4197962284088135
+      Pitch: 0.4897972643375397
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 6.083584785461426
+      Yaw: 1.680396318435669
     Saved: ~
 Window Geometry:
   Displays:

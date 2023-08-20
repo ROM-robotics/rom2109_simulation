@@ -22,7 +22,7 @@ windows:
   - Localization: 
       root: ~/
       panes:
-        - clear; source ~/.bashrc; ros2 launch rom2109_nav2 sim_localization_init_pose_launch.py
+        - clear; source ~/.bashrc; ros2 launch rom2109_nav2 sim_localization_launch.py
   - Navigation: 
       root: ~/
       panes:
@@ -31,4 +31,4 @@ windows:
       root: ~/
       panes:
         - clear; source ~/.bashrc; sleep 30; ros2 launch rom2109_autonomy autonomy.launch.py
-        - clear; source ~/.bashrc; ros2 run rom_markers deepblue
+        - clear; source ~/.bashrc; sleep 10; ros2 launch rom_markers marker.launch.py

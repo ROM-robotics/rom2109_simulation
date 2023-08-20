@@ -28,8 +28,12 @@ endif()
 add_executable(deepblue src/deepblue.cpp)
 ament_target_dependencies(deepblue rclcpp visualization_msgs)
 
+add_executable(romrobotics src/rom_robotics.cpp)
+ament_target_dependencies(romrobotics rclcpp visualization_msgs)
+
 install(TARGETS
   deepblue
+  romrobotics
   DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY

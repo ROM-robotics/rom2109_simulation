@@ -153,6 +153,13 @@ def generate_launch_description():
         ],
     )
 
+    # init_pose_node_cmd = Node(
+    #     package='rom2109_nav2',
+    #     executable='init_robot_pose',
+    #     name='init_robot_pose_by_custom_node',
+    #     output="screen"
+    # )
+
     # Create the launch description and populate
     ld = LaunchDescription()
 
@@ -173,5 +180,6 @@ def generate_launch_description():
     # Add the actions to launch all of the localiztion nodes
     ld.add_action(load_nodes)
     ld.add_action(load_composable_nodes)
+    #ld.add_action(init_pose_node_cmd)
 
     return ld

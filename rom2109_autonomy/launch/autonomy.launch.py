@@ -13,7 +13,7 @@ def generate_launch_description():
         parameters=[{
             "location_file": os.path.join(pkg_autonomy, "config", "sim_loc.yaml")
         }],
-         remappings=[('/cmd_vel', '/cmd_vel_bt')]
+        #remappings=[('/cmd_vel', '/cmd_vel_bt')]
     )
 
     ld = LaunchDescription()
