@@ -416,6 +416,7 @@
         <robotNamespace>/</robotNamespace>
       </plugin>
       <static>0</static>
+      
       <plugin name='differential_drive_controller' filename='libgazebo_ros_diff_drive.so'>
         <alwaysOn>1</alwaysOn>
         <legacyMode>1</legacyMode>

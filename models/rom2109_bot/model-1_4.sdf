@@ -186,7 +186,7 @@
                         <stddev>0.01</stddev>
                     </noise>
                 </ray>
-                <plugin name="amazon_robot_laserscan" filename="libgazebo_ros_ray_sensor.so">
+                <plugin name="rom_dynamic_laserscan" filename="libgazebo_ros_ray_sensor.so">
                     <ros>
                         <!-- <namespace>/tb3</namespace> -->
                         <remapping>~/out:=scan</remapping>
@@ -218,7 +218,7 @@
             <stddev>0.007</stddev>
           </noise>
           </camera>
-          <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <plugin name="rom_dynamic_camera_controller" filename="libgazebo_ros_camera.so">
             <alwaysOn>true</alwaysOn>
             <updateRate>0.0</updateRate>
             <cameraName>camera1</cameraName>
@@ -377,15 +377,13 @@
         <joint_name>right_wheel_joint</joint_name>
       </plugin>
       <static>0</static>
-      <plugin name='differential_drive_controller' filename='libgazebo_ros_diff_drive.so'>
+      <plugin name='rom_dynamic_differential_controller' filename='libgazebo_ros_diff_drive.so'>
         <alwaysOn>1</alwaysOn>
         <updateRate>10.0</updateRate>
         <robotBaseFrame>base_link</robotBaseFrame>
         <publishWheelTF>1</publishWheelTF>
         <publishWheelJointState>1</publishWheelJointState>
         <wheelAcceleration>1</wheelAcceleration>
-        <left_joint>left_wheel_joint</left_joint>
-        <right_joint>right_wheel_joint</right_joint>
         <wheel_separation>0.33</wheel_separation>
         <wheel_diameter>0.17</wheel_diameter>
         <wheelTorque>20</wheelTorque>
@@ -393,6 +391,27 @@
         <odometryTopic>odom</odometryTopic>
         <odometryFrame>odom</odometryFrame>
         <robotNamespace>/</robotNamespace>
+
+        <!-- May 7 2024 -->
+        <left_joint>left_wheel_joint</left_joint>
+        <right_joint>right_wheel_joint</right_joint>
+        <leftJoint>left_wheel_joint</leftJoint>
+        <rightJoint>right_wheel_joint</rightJoint>
+        <wheelSeparation>0.33</wheelSeparation>
+        <wheelDiameter>0.17</wheelDiameter>
+        <commandTopic>cmd_vel</commandTopic>
+        <odometryTopic>odom</odometryTopic>
+        <odometryFrame>odom</odometryFrame>
+
+        <!-- Odometry source, 0 for ENCODER, 1 for WORLD, defaults to WORLD -->
+        <odometrySource>1</odometrySource>
+        <publishWheelTF>true</publishWheelTF>
+        <publishOdom>true</publishOdom>
+        <publishWheelJointState>true</publishWheelJointState>
+
+        <!-- Set to true to swap right and left wheels, defaults to true -->
+        <legacyMode>false</legacyMode>
+        <!-- END -->
       </plugin>
       <pose frame=''>0 0 0 0 -0 0</pose>
     </model>

@@ -296,7 +296,7 @@
     <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
       <robot_param>robot_description</robot_param>
       <robot_param_node>robot_state_publisher</robot_param_node>
-      <parameters>/home/mr_robot/ros2/ros2_ws/install/rom2109_description/share/rom2109_description/config/my_controllers.yaml</parameters>
+      <parameters>/home/mr_robot/ros2/developer_ws/install/rom2109_description/share/rom2109_description/config/my_controllers.yaml</parameters>
       <!-- Output -->
       <odometry_frame>odom</odometry_frame>
       <robot_base_frame>base_footprint</robot_base_frame>
