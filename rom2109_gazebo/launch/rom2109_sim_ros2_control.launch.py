@@ -12,11 +12,11 @@ import xacro
 
 def generate_launch_description():
     gazebo_pkg = get_package_share_directory('rom2109_gazebo')
-    joy_pkg = get_package_share_directory('rom_robotics_joy')
+    #joy_pkg = get_package_share_directory('rom_robotics_joy')
     description_pkg = get_package_share_directory('rom2109_description')
     default_world_path = os.path.join(gazebo_pkg, 'worlds', 'cafe.world')
 
-    urdf_file = os.path.join(description_pkg,'urdf', 'urdf.urdf')
+    urdf_file = os.path.join(description_pkg,'urdf', 'yoururdf.urdf')
     # robot_description_config = xacro.process_file(xacro_file)
     # my_xml = robot_description_config.toxml()
 
@@ -42,7 +42,7 @@ def generate_launch_description():
         launch_arguments={
             "use_sim_time": "true",
             "robot_name": "rom2109",
-            "world": default_world_path,
+            #"world": default_world_path,
             "lite": "false",
             "world_init_x": "0.0",
             "world_init_y": "0.0",
@@ -56,25 +56,24 @@ def generate_launch_description():
     spawn_robot_node = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
-        #arguments=['-database', 'rom2109_tall_ros', '-entity', 'rom2109_tall_ros',
-        #arguments=['-file', urdf_file, '-entity', 'rom2109_tall_ros',
-        arguments=['-topic', '/robot_description', '-entity', 'rom2109_tall_ros',
+        # arguments=['-database', 'rom2109_tall_ros', '-entity', 'rom2109_tall_ros',
+        arguments=['-file', urdf_file, '-entity', 'rom2109_tall_psa',
                    "-x", '0.0',
                    "-y", '0.0',
                    "-z", '0.3'],
         output='screen'
     )
     
-    joystick_launch = IncludeLaunchDescription(
+    """ joystick_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(joy_pkg, 'launch', 'joystick.launch.py')]),
         launch_arguments={'use_sim_time': 'true'}.items(),
         #condition=IfCondition('use_joystick')
-    )
+    ) """
 
     return LaunchDescription(
         [
             DeclareLaunchArgument('open_rviz', default_value='false', description='Open RViz.'),
-            DeclareLaunchArgument('use_joystick', default_value='false', description='JoyStick.'),
+            DeclareLaunchArgument('use_joystick', default_value='true', description='JoyStick.'),
             DeclareLaunchArgument('use_sim_time', default_value='true', description='Sim Time'),
             bot,
             gazebo_launch,

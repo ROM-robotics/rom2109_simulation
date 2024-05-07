@@ -13,8 +13,7 @@ def generate_launch_description():
     default_world_path = os.path.join(gazebo_pkg, 'worlds', 'cafe.world')
     
     urdf_pkg = get_package_share_directory('rom2109_description')
-    urdf_path= os.path.join(urdf_pkg, 'urdf/raw', "rom2109_tall.urdf")
-    #urdf_path= os.path.join(urdf_pkg, 'urdf', "urdf.urdf")
+    urdf_path= os.path.join(urdf_pkg, 'urdf', "rom2109_tall.urdf")
     urdf = open(urdf_path).read()
 
     robot_state_publisher_node = Node(
@@ -43,7 +42,7 @@ def generate_launch_description():
         launch_arguments={
             "use_sim_time": "true",
             "robot_name": "rom2109",
-            #"world": default_world_path,
+            "world": default_world_path,
             "lite": "false",
             "world_init_x": "0.0",
             "world_init_y": "0.0",
@@ -65,7 +64,7 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
-            DeclareLaunchArgument('open_rviz', default_value='true', description='Open RViz.'),
+            DeclareLaunchArgument('open_rviz', default_value='false', description='Open RViz.'),
             robot_state_publisher_node,
             #joint_state_node,
             rviz_node,

@@ -19,7 +19,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://rom2109_description/meshes/tall/base_link.STL"/>
+        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/base_link.STL"/>
       </geometry>
       <material name="">
         <color rgba="0 0 0 1"/>
@@ -28,7 +28,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://rom2109_description/meshes/tall/base_link.STL"/>
+        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/base_link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -41,7 +41,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://rom2109_description/meshes/tall/right_wheel.STL"/>
+        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/right_wheel.STL"/>
       </geometry>
       <material name="">
         <color rgba="0.79608 0.82353 0.93725 1"/>
@@ -50,7 +50,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://rom2109_description/meshes/tall/right_wheel.STL"/>
+        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/right_wheel.STL"/>
       </geometry>
     </collision>
   </link>
@@ -69,7 +69,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://rom2109_description/meshes/tall/left_wheel.STL"/>
+        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/left_wheel.STL"/>
       </geometry>
       <material name="">
         <color rgba="0.796078431372549 0.823529411764706 0.937254901960784 1"/>
@@ -78,7 +78,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://rom2109_description/meshes/tall/left_wheel.STL"/>
+        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/left_wheel.STL"/>
       </geometry>
     </collision>
   </link>
@@ -97,7 +97,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://rom2109_description/meshes/tall/plate1.STL"/>
+        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/plate1.STL"/>
       </geometry>
       <material name="">
         <color rgba="1 1 0 1"/>
@@ -106,7 +106,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://rom2109_description/meshes/tall/plate1.STL"/>
+        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/plate1.STL"/>
       </geometry>
     </collision>
   </link>
@@ -125,7 +125,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://rom2109_description/meshes/tall/camera.STL"/>
+        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/camera.STL"/>
       </geometry>
       <material name="">
         <color rgba="0.79216 0.81961 0.93333 1"/>
@@ -134,7 +134,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://rom2109_description/meshes/tall/camera.STL"/>
+        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/camera.STL"/>
       </geometry>
     </collision>
   </link>
@@ -153,7 +153,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://rom2109_description/meshes/tall/lidar.STL"/>
+        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/lidar.STL"/>
       </geometry>
       <material name="">
         <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
@@ -162,7 +162,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://rom2109_description/meshes/tall/lidar.STL"/>
+        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/lidar.STL"/>
       </geometry>
     </collision>
   </link>
@@ -181,7 +181,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://rom2109_description/meshes/tall/plate2.STL"/>
+        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/plate2.STL"/>
       </geometry>
       <material name="">
         <color rgba="1 1 0 1"/>
@@ -190,7 +190,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://rom2109_description/meshes/tall/plate2.STL"/>
+        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/plate2.STL"/>
       </geometry>
     </collision>
   </link>
@@ -209,7 +209,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://rom2109_description/meshes/tall/plate3.STL"/>
+        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/plate3.STL"/>
       </geometry>
       <material name="">
         <color rgba="1 1 0 1"/>
@@ -218,7 +218,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://rom2109_description/meshes/tall/plate3.STL"/>
+        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/plate3.STL"/>
       </geometry>
     </collision>
   </link>
@@ -240,36 +240,6 @@
   </gazebo>
   <gazebo reference="plate3">
     <material>Gazebo/Yellow</material>
-  </gazebo>
-  <gazebo reference="lidar">
-    <material>Gazebo/Red</material>
-    <sensor name="laser" type="ray">
-      <pose>0 0 0 0 0 0</pose>
-      <visualize>false</visualize>
-      <update_rate>10</update_rate>
-      <ray>
-        <scan>
-          <horizontal>
-            <samples>360</samples>
-            <resolution>1</resolution>
-            <min_angle>-3.14</min_angle>
-            <max_angle>3.14</max_angle>
-          </horizontal>
-        </scan>
-        <range>
-          <min>0.3</min>
-          <max>12</max>
-          <resolution>0.01</resolution>
-        </range>
-      </ray>
-      <plugin filename="libgazebo_ros_ray_sensor.so" name="laser_controller">
-        <ros>
-          <argument>--ros-args --remap ~/out:=scan</argument>
-        </ros>
-        <output_type>sensor_msgs/LaserScan</output_type>
-        <frame_name>lidar</frame_name>
-      </plugin>
-    </sensor>
   </gazebo>
   <ros2_control name="GazeboSystem" type="system">
     <hardware>
@@ -305,6 +275,37 @@
       <publish_wheel_tf>true</publish_wheel_tf>
     </plugin>
   </gazebo>
+  <gazebo reference="lidar">
+    <material>Gazebo/Red</material>
+    <sensor name="laser" type="ray">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>false</visualize>
+      <update_rate>10</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14</min_angle>
+            <max_angle>3.14</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.3</min>
+          <max>12</max>
+          <resolution>0.01</resolution>
+        </range>
+      </ray>
+      <plugin filename="libgazebo_ros_ray_sensor.so" name="laser_controller">
+        <ros>
+          <argument>~/out:=scan</argument>
+        </ros>
+        <output_type>sensor_msgs/LaserScan</output_type>
+        <frame_name>lidar</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+  <!-- <xacro:include filename="hw_ros2_control.xacro" />  -->
   <!-- <xacro:include filename="gazebo_control.xacro" /> -->
   <joint name="camera_optical_joint" type="fixed">
     <parent link="camera"/>
