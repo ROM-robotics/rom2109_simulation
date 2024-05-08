@@ -142,6 +142,8 @@ Visualization Manager:
           Value: false
         lidar:
           Value: false
+        map:
+          Value: true
         odom:
           Value: true
         plate1:
@@ -158,6 +160,8 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
+        map:
+          {}
         odom:
           base_footprint:
             base_link:
@@ -321,7 +325,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: -0.014999528415501118
+      Angle: -0.19999973475933075
       Class: rviz_default_plugins/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -331,11 +335,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 268.0450134277344
+      Scale: 218.19313049316406
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz_default_plugins)
-      X: 0.39243605732917786
-      Y: 0.5643355846405029
+      X: 0.6971863508224487
+      Y: -0.4855838119983673
     Saved: ~
 Window Geometry:
   Camera:

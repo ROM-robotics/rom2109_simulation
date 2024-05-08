@@ -166,7 +166,7 @@ def generate_launch_description():
                 parameters=[configured_params],
                 arguments=['--ros-args', '--log-level', log_level],
                 remappings=remappings +
-                        [('cmd_vel', 'cmd_vel_nav'), ('cmd_vel_smoothed', 'cmd_vel')]),
+                        [('cmd_vel', 'cmd_vel_nav'), ('cmd_vel_smoothed', '/diff_cont/cmd_vel_unstamped')]),
             Node(
                 package='nav2_collision_monitor',
                 executable='collision_monitor',
