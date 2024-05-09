@@ -1,6 +1,6 @@
 # ./.tmuxinator.yml
 
-name: ROM Dynamics Co.,Ltd
+name: ROM Dynamics
 root: ~/
 
 pre_window: export PS1=" \[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;45m\]>>>\[$(tput sgr0)\] \[$(tput sgr0)\]"
