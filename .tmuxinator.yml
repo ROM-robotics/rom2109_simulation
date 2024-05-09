@@ -1,6 +1,6 @@
 # ./.tmuxinator.yml
 
-name: DEEP BLUE AI Lab
+name: ROM Dynamics Co.,Ltd
 root: ~/
 
 pre_window: export PS1=" \[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;45m\]>>>\[$(tput sgr0)\] \[$(tput sgr0)\]"
@@ -30,5 +30,5 @@ windows:
   - BehaviorTree: 
       root: ~/
       panes:
-        - clear; source ~/.bashrc; sleep 30; ros2 launch rom2109_autonomy autonomy.launch.py
-        - clear; source ~/.bashrc; ros2 run rom_markers deepblue
+        - #clear; source ~/.bashrc; sleep 30; ros2 launch rom2109_autonomy autonomy.launch.py
+        - #clear; source ~/.bashrc; ros2 run rom_markers deepblue

@@ -135,7 +135,7 @@ def generate_launch_description():
                 respawn_delay=2.0,
                 parameters=[configured_params],
                 arguments=['--ros-args', '--log-level', log_level],
-                remappings=remapping+ [('cmd_vel_teleop', 'cmd_vel_teleop'), ('cmd_vel', 'cmd_vel_bhserver_to')]),
+                remappings=remapping+ [('cmd_vel_teleop', 'cmd_vel_teleop'), ('cmd_vel', 'cmd_vel_bhserver')]),
             Node(
                 package='nav2_bt_navigator',
                 executable='bt_navigator',
@@ -176,7 +176,7 @@ def generate_launch_description():
                 respawn_delay=2.0,
                 parameters=[configured_params],
                 arguments=['--ros-args', '--log-level', log_level],
-                remappings=remapping+ [('cmd_vel_raw', 'cmd_vel_smoother_to_collision'), ('cmd_vel', 'diff_cont/cmd_vel_unstamped')]),
+                remappings=remapping+ [('cmd_vel_raw', 'cmd_vel_smoother_to_collision'), ('cmd_vel_collision', 'cmd_vel_collision_to_diff_cont')]),
             Node(
                 package='nav2_lifecycle_manager',
                 executable='lifecycle_manager',
@@ -241,7 +241,7 @@ def generate_launch_description():
                 plugin='nav2_collision_monitor::CollisionMonitor',
                 name='collision_monitor',
                 parameters=[configured_params],
-                remappings=remapping+ [('cmd_vel_raw', 'cmd_vel_smoother_to_collision'), ('cmd_vel', 'diff_cont/cmd_vel_unstamped')]),
+                remappings=remapping+ [('cmd_vel_raw', 'cmd_vel_smoother_to_collision'), ('cmd_vel', 'cmd_vel_collision_to_diff_cont')]),
             ComposableNode(
                 package='nav2_lifecycle_manager',
                 plugin='nav2_lifecycle_manager::LifecycleManager',
