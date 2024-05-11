@@ -14,7 +14,7 @@ def generate_launch_description():
     gazebo_pkg = get_package_share_directory('rom2109_gazebo')
     #joy_pkg = get_package_share_directory('rom_robotics_joy')
     description_pkg = get_package_share_directory('rom2109_description')
-    default_world_path = os.path.join(gazebo_pkg, 'worlds', 'balls_without_robot.world')
+    default_world_path = os.path.join(gazebo_pkg, 'worlds', 'rom_maze_1.world')
 
     urdf_file = os.path.join(description_pkg,'urdf', 'yoururdf.urdf')
     # robot_description_config = xacro.process_file(xacro_file)

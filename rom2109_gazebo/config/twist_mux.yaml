@@ -6,10 +6,10 @@ twist_mux:
         timeout: 0.5
         priority: 10
       behavior:
-        topic: cmd_vel_bt # behavior tree
+        topic: cmd_vel_bhserver # behavior tree
         timeout: 0.5
         priority: 100
-      joystick:
-        topic: cmd_vel_joy # behavior tree
-        timeout: 0.5
-        priority: 100
+      #joystick:
+        #topic: cmd_vel_joy # behavior tree
+        #timeout: 0.5
+        #priority: 100

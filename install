@@ -5,6 +5,7 @@ if [[ -e ~/.gazebo/models ]]
 then
 	echo "models Directory exists."
 	rm -rf ~/.gazebo/models/rom2109*
+	rm -rf ~/.gazebo/models/rom_maze*
 else
 	mkdir -p ~/.gazebo/models
 fi
