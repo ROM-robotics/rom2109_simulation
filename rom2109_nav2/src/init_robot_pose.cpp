@@ -39,7 +39,7 @@ class InitPose : public rclcpp::Node
                                 0,0,0,0,0,0,
                                 0,0,0,0,0,0.25};
 
-        publisher_->publish(msg);
+        publisher_->publish(msg); 
         if(count_== 10) { rclcpp::shutdown(); RCLCPP_INFO(get_logger(),"OK i will shutdown."); }
         RCLCPP_INFO(get_logger(),"Publish initial pose");
         count_++;

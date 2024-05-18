@@ -14,7 +14,7 @@ def generate_launch_description():
     gazebo_pkg = get_package_share_directory('rom2109_gazebo')
     #joy_pkg = get_package_share_directory('rom_robotics_joy')
     description_pkg = get_package_share_directory('rom2109_description')
-    default_world_path = os.path.join(gazebo_pkg, 'worlds', 'rom_maze_1.world')
+    default_world_path = os.path.join(gazebo_pkg, 'worlds', 'rom_maze_4.world')
 
     urdf_file = os.path.join(description_pkg,'urdf', 'yoururdf.urdf')
     # robot_description_config = xacro.process_file(xacro_file)
@@ -29,7 +29,7 @@ def generate_launch_description():
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
-        arguments=['-d', os.path.join(gazebo_pkg, 'rviz2', 'display.rviz')],
+        arguments=['-d', os.path.join(gazebo_pkg, 'rviz2', 'slam.rviz')],
         condition=IfCondition(LaunchConfiguration('open_rviz'))
     )
 

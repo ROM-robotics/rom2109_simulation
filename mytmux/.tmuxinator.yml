@@ -1,0 +1,31 @@
+# ./.tmuxinator.yml
+
+name: ROM Dynamics 
+root: ~/
+
+pre_window: export PS1=" \[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;45m\]>>>\[$(tput sgr0)\] \[$(tput sgr0)\]"
+
+startup_window: BehaviorTree
+# startup_pane: 0
+
+windows:
+  - Gazebo: 
+      root: ~/
+      panes:
+        - clear; source ~/.bashrc; ros2 launch rom2109_gazebo simulation.launch.py open_rviz:=false
+  - SlamToolBox: 
+      root: ~/
+      panes:
+        - clear; source ~/.bashrc; #ros2 launch rom2109_nav2 online_async_launch_mapping_launch.py
+  - CartoGrpher: 
+      root: ~/
+      panes:
+        - clear; source ~/.bashrc; ros2 launch rom2109_carto cartographer.launch.py
+  - TwistKeyboard: 
+      root: ~/
+      panes:
+        - clear; source ~/.bashrc; ros2 run teleop_twist_keyboard teleop_twist_keyboard /cmd_vel:=/diff_cont/cmd_vel_unstamped
+  - CLI2: 
+      root: ~/
+      panes:
+        - clear; source ~/.bashrc; 
