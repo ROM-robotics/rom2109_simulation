@@ -2,14 +2,18 @@ twist_mux:
   ros__parameters:
     topics:
       navigation:
-        topic: cmd_vel_collision_to_diff_cont # rviz goal
+        topic: cmd_vel_collision_to_diff_cont # controller server
         timeout: 0.5
         priority: 10
       behavior:
-        topic: cmd_vel_bhserver # behavior tree
+        topic: cmd_vel_bhserver # recover server
         timeout: 0.5
         priority: 100
-      #joystick:
-        #topic: cmd_vel_joy # behavior tree
-        #timeout: 0.5
-        #priority: 100
+      joystick:
+        topic: cmd_vel_joy      # joy stick
+        timeout: 0.5
+        priority: 100
+      keyboard: 
+        topic: cmd_vel_keyboard
+        timeout: 0.5
+        priority: 100

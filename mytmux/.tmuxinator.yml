@@ -12,19 +12,19 @@ windows:
   - Gazebo: 
       root: ~/
       panes:
-        - clear; source ~/.bashrc; ros2 launch rom2109_gazebo simulation.launch.py open_rviz:=false
+        - clear; source ~/.bashrc; ros2 launch rom2109_gazebo simulation.launch.py open_rviz:=True use_sim_time:=True
   - SlamToolBox: 
       root: ~/
       panes:
-        - clear; source ~/.bashrc; #ros2 launch rom2109_nav2 online_async_launch_mapping_launch.py
+        - clear; source ~/.bashrc; ros2 launch rom2109_nav2 online_async_launch_mapping_launch.py use_sim_time:=True
   - CartoGrpher: 
       root: ~/
       panes:
-        - clear; source ~/.bashrc; ros2 launch rom2109_carto cartographer.launch.py
+        - clear; source ~/.bashrc; #ros2 launch rom2109_carto cartographer.launch.py use_sim_time:=True
   - TwistKeyboard: 
       root: ~/
       panes:
-        - clear; source ~/.bashrc; ros2 run teleop_twist_keyboard teleop_twist_keyboard /cmd_vel:=/diff_cont/cmd_vel_unstamped
+        - clear; source ~/.bashrc; ros2 run teleop_twist_keyboard teleop_twist_keyboard /cmd_vel:=/cmd_vel_keyboard
   - CLI2: 
       root: ~/
       panes:

@@ -17,13 +17,13 @@ slamtoolbox အတွက် yaml ဖိုင်မှာ frame တွေစစ�
 ###### ros2 launch slam_toolbox online_async_launch.py params_file:=/pathto/yaml use_sim_time:=true
 သို့မဟုတ် အောက်က ပြင်ဆင်ပြီးသား launch ဖိုင်ကို run ပါ။
 ```
-ros2 launch rom2109_gazebo rom2109_sim_ros2_control.launch.py
+ros2 launch rom2109_gazebo rom2109_sim_ros2_control.launch.py use_sim_time:=True open_rviz:=True
 ros2 launch rom2109_gazebo controller_spawner.launch.py
-ros2 launch rom2109_nav2 online_async_launch_mapping_launch.py
+ros2 launch rom2109_nav2 online_async_launch_mapping_launch.py use_sim_time:=True
 ```
 ##### rviz မှာ config ဖြစ်တဲ့ rom2109_gazebo/rviz2/slam.rviz ကို ဖွင့်ပါ။ ပြီးရင် အောက်ပါ node နဲ့ မောင်းပါ။
 ```
-ros2 run teleop_twist_keyboard teleop_twist_keyboard /cmd_vel:=/diff_cont/cmd_vel_unstamped
+ros2 run teleop_twist_keyboard teleop_twist_keyboard /cmd_vel:=/cmd_vel_keyboard
 ```
  ပြီးရင် ပါတ်မောင်းပြီး မြေပုံကို save ပါ။
  မြေပုံ save ဖို့က 
