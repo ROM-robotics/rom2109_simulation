@@ -72,7 +72,7 @@ ros2 launch rom2109_gazebo rom2109_sim_ros2_control.launch.py
 ros2 launch rom2109_gazebo controller_spawner.launch.py
 ros2 launch rom2109_nav2 sim_localization_init_pose_launch.py
 # ဒါဆို ဒီအဆင့်မှာ map->odom ရပါပြီ။ 2D pose estimate နှိပ်စရာမလိုတော့။
-ros2 launch rom2109_nav2 sim_navigation_launch.py map_subscribe_transient_local:=true
+ros2 launch rom2109_nav2 sim_navigation_launch.py map_subscribe_transient_local:=True
 ```
 
 ### 4 Patrol System 

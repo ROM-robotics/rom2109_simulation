@@ -21,6 +21,10 @@ windows:
       root: ~/
       panes:
         - clear; source ~/.bashrc; #ros2 launch rom2109_carto cartographer.launch.py use_sim_time:=True
+  - NAV2: 
+      root: ~/
+      panes:
+        - clear; source ~/.bashrc; ros2 launch rom2109_nav2 sim_navigation_launch.py map_subscribe_transient_local:=True use_sim_time:=True
   - TwistKeyboard: 
       root: ~/
       panes:
