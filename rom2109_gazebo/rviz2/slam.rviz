@@ -7,8 +7,9 @@ Panels:
         - /TF1/Frames1
         - /LaserScan1/Topic1
         - /Map1/Topic1
-        - /Odometry_diff1/Status1
-        - /Odometry_ekf1
+        - /Odometry_diff1
+        - /Odometry_diff1/Topic1
+        - /Odometry_diff1/Shape1
         - /Odometry_ekf1/Topic1
         - /Odometry_ekf1/Shape1
       Splitter Ratio: 0.5
@@ -170,26 +171,25 @@ Visualization Manager:
       Show Names: true
       Tree:
         map:
-          {}
-        odom:
-          base_footprint:
-            base_link:
-              imu_link:
-                {}
-              left_wheel:
-                {}
-              plate1:
-                camera:
-                  camera_link_optical:
-                    {}
-                lidar:
+          odom:
+            base_footprint:
+              base_link:
+                imu_link:
                   {}
-              plate2:
-                {}
-              plate3:
-                {}
-              right_wheel:
-                {}
+                left_wheel:
+                  {}
+                plate1:
+                  camera:
+                    camera_link_optical:
+                      {}
+                  lidar:
+                    {}
+                plate2:
+                  {}
+                plate3:
+                  {}
+                right_wheel:
+                  {}
       Update Interval: 0
       Value: true
     - Class: rviz_default_plugins/Image
@@ -320,8 +320,8 @@ Visualization Manager:
         Axes Radius: 0.10000000149011612
         Color: 255; 25; 0
         Head Length: 0.30000001192092896
-        Head Radius: 0.10000000149011612
-        Shaft Length: 1
+        Head Radius: 0.07000000029802322
+        Shaft Length: 0.5
         Shaft Radius: 0.05000000074505806
         Value: Arrow
       Topic:
@@ -416,7 +416,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: -0.0949997529387474
+      Angle: -0.05499930679798126
       Class: rviz_default_plugins/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -426,11 +426,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 297.78070068359375
+      Scale: 435.784912109375
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz_default_plugins)
-      X: 0.6971863508224487
-      Y: -0.4855838119983673
+      X: 0.33583369851112366
+      Y: -0.17925547063350677
     Saved: ~
 Window Geometry:
   Camera:

@@ -32,4 +32,4 @@ windows:
   - CLI: 
       root: ~/
       panes:
-        - clear; source ~/.bashrc; 
+        - source ~/.bashrc; clear; 
