@@ -420,6 +420,14 @@
       xyz="0 0 0" />
   </joint>
 
+
+    <link name="imu_link"/>
+    <joint name="imu_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="imu_link"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </joint>
+
   <!-- Colour -->
   <gazebo reference="base_link">
     <material>Gazebo/Black</material>
