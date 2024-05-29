@@ -14,10 +14,13 @@ echo "models Copy finished!"
 
 # Modifying urdf.urdf
 echo "Modifying file paths in urdf.urdf "
-read -p "Enter ROS2 WORKSPACE FOLDER eg.(/home/your_name/your_path/ros2_workspace) :" ros2_ws_path
+read -p "Enter ROS2 WORKSPACE FOLDER eg.(/home/your_username/path_to_ros2_workspace) :" ros2_ws_path
 name=$HOME
-sed -i "s|/home/rom/ros2/ros2_ws|$ros2_ws_path|" ./rom2109_description/urdf/urdf.urdf
-sed -i "s|/home/rom|$name|" ./rom2109_description/urdf/urdf.urdf
+
+str1="$HOME/.gazebo"
+sed -i "s|/home/mr_robot/.gazebo|$str1|" ./rom2109_description/urdf/urdf.urdf
+str2="<parameters>$ros2_ws_path"
+sed -i "s|<parameters>/home/mr_robot/ros2/developer_ws|$str2|" ./rom2109_description/urdf/yoururdf.urdf
 
 # Remove cafe.world
 rm ./rom2109_gazebo/worlds/cafe.world

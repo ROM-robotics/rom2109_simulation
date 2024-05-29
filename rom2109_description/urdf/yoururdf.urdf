@@ -20,7 +20,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/base_link.STL"/>
+        <mesh filename="/home/mr_robot/.gazebo/models/rom2109_description/rom2109_description/meshes/tall/base_link.STL"/>
       </geometry>
       <material name="">
         <color rgba="0 0 0 1"/>
@@ -29,7 +29,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/base_link.STL"/>
+        <mesh filename="/home/mr_robot/.gazebo/models/rom2109_description/rom2109_description/meshes/tall/base_link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -42,7 +42,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/right_wheel.STL"/>
+        <mesh filename="/home/mr_robot/.gazebo/models/rom2109_description/rom2109_description/meshes/tall/right_wheel.STL"/>
       </geometry>
       <material name="">
         <color rgba="0.79608 0.82353 0.93725 1"/>
@@ -51,7 +51,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/right_wheel.STL"/>
+        <mesh filename="/home/mr_robot/.gazebo/models/rom2109_description/rom2109_description/meshes/tall/right_wheel.STL"/>
       </geometry>
     </collision>
   </link>
@@ -70,7 +70,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/left_wheel.STL"/>
+        <mesh filename="/home/mr_robot/.gazebo/models/rom2109_description/rom2109_description/meshes/tall/left_wheel.STL"/>
       </geometry>
       <material name="">
         <color rgba="0.796078431372549 0.823529411764706 0.937254901960784 1"/>
@@ -79,7 +79,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/left_wheel.STL"/>
+        <mesh filename="/home/mr_robot/.gazebo/models/rom2109_description/rom2109_description/meshes/tall/left_wheel.STL"/>
       </geometry>
     </collision>
   </link>
@@ -98,7 +98,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/plate1.STL"/>
+        <mesh filename="/home/mr_robot/.gazebo/models/rom2109_description/rom2109_description/meshes/tall/plate1.STL"/>
       </geometry>
       <material name="">
         <color rgba="1 1 0 1"/>
@@ -107,7 +107,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/plate1.STL"/>
+        <mesh filename="/home/mr_robot/.gazebo/models/rom2109_description/rom2109_description/meshes/tall/plate1.STL"/>
       </geometry>
     </collision>
   </link>
@@ -126,7 +126,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/camera.STL"/>
+        <mesh filename="/home/mr_robot/.gazebo/models/rom2109_description/rom2109_description/meshes/tall/camera.STL"/>
       </geometry>
       <material name="">
         <color rgba="0.79216 0.81961 0.93333 1"/>
@@ -135,7 +135,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/camera.STL"/>
+        <mesh filename="/home/mr_robot/.gazebo/models/rom2109_description/rom2109_description/meshes/tall/camera.STL"/>
       </geometry>
     </collision>
   </link>
@@ -154,7 +154,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/lidar.STL"/>
+        <mesh filename="/home/mr_robot/.gazebo/models/rom2109_description/rom2109_description/meshes/tall/lidar.STL"/>
       </geometry>
       <material name="">
         <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
@@ -163,7 +163,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/lidar.STL"/>
+        <mesh filename="/home/mr_robot/.gazebo/models/rom2109_description/rom2109_description/meshes/tall/lidar.STL"/>
       </geometry>
     </collision>
   </link>
@@ -182,7 +182,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/plate2.STL"/>
+        <mesh filename="/home/mr_robot/.gazebo/models/rom2109_description/rom2109_description/meshes/tall/plate2.STL"/>
       </geometry>
       <material name="">
         <color rgba="1 1 0 1"/>
@@ -191,7 +191,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/plate2.STL"/>
+        <mesh filename="/home/mr_robot/.gazebo/models/rom2109_description/rom2109_description/meshes/tall/plate2.STL"/>
       </geometry>
     </collision>
   </link>
@@ -210,7 +210,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/plate3.STL"/>
+        <mesh filename="/home/mr_robot/.gazebo/models/rom2109_description/rom2109_description/meshes/tall/plate3.STL"/>
       </geometry>
       <material name="">
         <color rgba="1 1 0 1"/>
@@ -219,7 +219,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_description/meshes/tall/plate3.STL"/>
+        <mesh filename="/home/mr_robot/.gazebo/models/rom2109_description/rom2109_description/meshes/tall/plate3.STL"/>
       </geometry>
     </collision>
   </link>
