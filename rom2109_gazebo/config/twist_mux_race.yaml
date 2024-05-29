@@ -1,0 +1,19 @@
+twist_mux:
+  ros__parameters:
+    topics:
+      linear:
+        topic: linear_vel 
+        timeout: 0.5
+        priority: 10
+      pid:
+        topic: pid_vel 
+        timeout: 0.5
+        priority: 20
+      aes:
+        topic: brake      
+        timeout: 0.5
+        priority: 250
+      keyboard: 
+        topic: cmd_vel_keyboard
+        timeout: 0.5
+        priority: 100
