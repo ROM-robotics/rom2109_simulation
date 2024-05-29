@@ -68,7 +68,9 @@ private:
 
     void scan_callback(const sensor_msgs::msg::LaserScan::ConstSharedPtr scan_msg) 
     {
-        TTC_final_threshold = this->get_parameter("ttc_final").as_double(); // second
+        // လက်တွေ့မှာ param read က topic ကို မလိုက်နိုင်လောက်ဘူး။ dynamic reconfigure သုံးရင်သုံး
+        // ဒီလိုင်းကို ဖျက်လို့ ရလောက်တယ်။
+        TTC_final_threshold = this->get_parameter("ttc_final").as_double(); // seconds
         
         double min_TTC = 1000000.0;
         double velocity_x = odom_velocity_x_;
