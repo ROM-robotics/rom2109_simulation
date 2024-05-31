@@ -45,8 +45,7 @@ namespace rom_dynamics
             double getKp() { return kp_; }
             double getKi() { return ki_; }
             double getKd() { return kd_; }
-
-            double control(double error, double dt);
+            
             double pidControl(double desire, double actual, double dt, double min, double max);
             ~PID();
         private:
@@ -56,8 +55,10 @@ namespace rom_dynamics
             double min_;
             double max_;
             double error_;
+            double previous_error_;
+            double integral_error_;
         };
-        PID::PID() : kp_(1.0), ki_(0), kd_(0), min_(-100000), max_(100000) 
+        PID::PID() : kp_(1.0), ki_(0), kd_(0), min_(-100000), max_(100000), error_(0), previous_error_(0), integral_error_(0) 
         {
             RCLCPP_INFO(rclcpp::get_logger("\033[1;33mPID\033[1;0m"), ": \033[1;32mKp : %.4f\033[1;0m", this->kp_); 
             RCLCPP_INFO(rclcpp::get_logger("\033[1;33mPID\033[1;0m"), ": \033[1;32mKi : %.4f\033[1;0m", this->ki_); 
@@ -67,7 +68,15 @@ namespace rom_dynamics
         double PID::pidControl(double desire, double actual, double dt, double min, double max)
         {
             error_ = desire - actual;
-            return control(error_, dt);
+            integral_error_  += (error_*dt);
+
+            double pidTerm = kp_ * error_ + ki_ * integral_error_ + kd_ * ((error_-previous_error_)/dt);
+            previous_error_  = error_;
+            
+            if(pidTerm < min_) { pidTerm = min_;}
+            else if(pidTerm > max_) { pidTerm = max_;}
+
+            return pidTerm;
         }
         double control(double error, double dt)
         {
