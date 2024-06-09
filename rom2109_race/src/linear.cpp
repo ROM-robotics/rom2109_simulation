@@ -21,7 +21,7 @@ class LinearPublisher : public rclcpp::Node
         }
       
 
-      twist_publisher_ = this->create_publisher<geometry_msgs::msg::Twist>("/linear_vel", 10);
+      twist_publisher_ = this->create_publisher<geometry_msgs::msg::Twist>("/cmd_vel", 10);
       timer_ = this->create_wall_timer(
       100ms, std::bind(&LinearPublisher::timer_callback, this));
 

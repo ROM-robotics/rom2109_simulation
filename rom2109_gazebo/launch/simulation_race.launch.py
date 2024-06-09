@@ -27,6 +27,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource([os.path.join(
             description_pkg, 'launch', 'description_ros2_control.launch.py'
         )]), launch_arguments={'use_sim_time': 'true'}.items()
+        
     )
 
     rviz_node = Node(
@@ -44,7 +45,7 @@ def generate_launch_description():
             get_package_share_directory("gazebo_ros"), "launch", "gazebo.launch.py")),
         launch_arguments={
             "use_sim_time": "true",
-            "robot_name": "rom2109",
+            "robot_name": "rom2109_tall_ros",
             "world": default_world_path,
             "lite": "false",
             "world_init_x": "0.0",
@@ -59,14 +60,15 @@ def generate_launch_description():
     spawn_robot_node = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
-        #arguments=['-database', 'rom2109_tall_ros', '-entity', 'rom2109_tall_ros',
+        arguments=['-database', 'rom2109_tall_ros', '-entity', 'rom2109_tall_ros',
         #arguments=['-file', urdf_file, '-entity', 'rom2109_tall',
-        arguments=['-entity', 'rom2109_tall_ros', '-topic', 'robot_description',
-                   "-x", '0.0',
-                   "-y", '0.0',
+        #arguments=['-entity', 'rom2109_tall_ros', '-topic', 'robot_description',
+                   "-x", '-9.0',
+                   "-y", '-5.0',
                    "-z", '0.3'],
         output='screen'
     )
+
     
     """ joystick_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(joy_pkg, 'launch', 'joystick.launch.py')]),
@@ -105,7 +107,7 @@ def generate_launch_description():
             spawn_robot_node,
             #joystick_launch,
             #twist_mux_node,
-            #iff_drive_spawner,
+            #diff_drive_spawner,
             #joint_broad_spawner,
         ]
     )

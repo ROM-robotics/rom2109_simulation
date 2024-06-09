@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="rom2109">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="rom2109_tall_ros">
     
     <xacro:include filename="rom2109_core.xacro" />
-    <!-- <xacro:include filename="sim_ros2_control.xacro" />  -->
+    <xacro:include filename="sim_ros2_control.xacro" /> 
     <xacro:include filename="lidar.xacro" />
 
     <!-- <xacro:include filename="hw_ros2_control.xacro" />  -->
