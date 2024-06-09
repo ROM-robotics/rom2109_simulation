@@ -10,6 +10,8 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.event_handlers import OnProcessExit, OnProcessStart
 import xacro
 
+import time
+
 def generate_launch_description():
     gazebo_pkg = get_package_share_directory('rom2109_gazebo')
     race_pkg = get_package_share_directory('rom2109_race')
@@ -17,7 +19,7 @@ def generate_launch_description():
     description_pkg = get_package_share_directory('rom2109_description')
     default_world_path = os.path.join(race_pkg, 'worlds', 'single_square.world')
 
-    urdf_file = os.path.join(description_pkg,'urdf', 'yoururdf.urdf')
+    urdf_file = os.path.join(description_pkg,'urdf', 'robot_sim_ros2_control.urdf.xacro')
     # robot_description_config = xacro.process_file(xacro_file)
     # my_xml = robot_description_config.toxml()
 
@@ -57,8 +59,9 @@ def generate_launch_description():
     spawn_robot_node = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
-        # arguments=['-database', 'rom2109_tall_ros', '-entity', 'rom2109_tall_ros',
-        arguments=['-file', urdf_file, '-entity', 'rom2109_tall_psa',
+        #arguments=['-database', 'rom2109_tall_ros', '-entity', 'rom2109_tall_ros',
+        #arguments=['-file', urdf_file, '-entity', 'rom2109_tall',
+        arguments=['-entity', 'rom2109_tall_ros', '-topic', 'robot_description',
                    "-x", '0.0',
                    "-y", '0.0',
                    "-z", '0.3'],
@@ -81,7 +84,6 @@ def generate_launch_description():
 
     diff_drive_spawner = Node(
         package="controller_manager",
-        namespace='',
         executable="spawner",
         arguments=["diff_cont"],
     )
@@ -102,9 +104,9 @@ def generate_launch_description():
             rviz_node,
             spawn_robot_node,
             #joystick_launch,
-            twist_mux_node,
-            diff_drive_spawner,
-            joint_broad_spawner,
+            #twist_mux_node,
+            #iff_drive_spawner,
+            #joint_broad_spawner,
         ]
     )
 ''' 
