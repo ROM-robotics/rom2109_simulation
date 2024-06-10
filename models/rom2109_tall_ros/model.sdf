@@ -440,8 +440,8 @@
       <!-- limits -->
       <max_wheel_torque>20</max_wheel_torque>
       <max_wheel_acceleration>1.0</max_wheel_acceleration>
-
-      <command_topic>cmd_vel</command_topic>
+<!-- 
+      <command_topic>cmd_vel</command_topic> -->
 
       <!-- output -->
       <publish_odom>true</publish_odom>
@@ -451,6 +451,10 @@
       <odometry_topic>odom</odometry_topic>
       <odometry_frame>odom</odometry_frame>
       <robot_base_frame>base_footprint</robot_base_frame>
+
+      <remapping>cmd_vel:=cmd_vel</remapping>
+      <remapping>odom:=odom</remapping>
+      <!-- <remapping>distance:=distance</remapping> -->
 
     </plugin>
 
