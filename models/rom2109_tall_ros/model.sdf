@@ -237,9 +237,8 @@
             </script>
           </material>
         </visual>
-        <velocity_decay/>
-        <velocity_decay/>
-        <velocity_decay/>
+       
+
         <sensor name='head_hokuyo_sensor' type='ray'>
           <visualize>1</visualize>
           <update_rate>40</update_rate>
@@ -268,16 +267,18 @@
               <stddev>0.01</stddev>
             </noise>
           </ray>
-          <plugin name='gazebo_ros_head_hokuyo_controller' filename='libgazebo_ros_laser.so'>
-            <topicName>/scan</topicName>
+          <plugin name='romdynamics_laser' filename='libgazebo_ros_ray_sensor.so'>
+            <ros>
+                    <argument>~/out:=scan</argument>
+                </ros>
             <frameName>lidar</frameName>
-            <robotNamespace>/</robotNamespace>
+           
           </plugin>
           <pose frame=''>0.012125 -0.00158 0.18765 0 -0 0</pose>
         </sensor>
-        <velocity_decay/>
+       
         <gravity>1</gravity>
-        <velocity_decay/>
+        
         <self_collide>0</self_collide>
         <enable_wind>0</enable_wind>
         <kinematic>0</kinematic>

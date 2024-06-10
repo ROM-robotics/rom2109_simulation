@@ -11,7 +11,7 @@
 using namespace std::chrono_literals;
 using std::placeholders::_1;
 
-std::string odom_topic = "/diff_cont/odom";
+std::string odom_topic = "/odom";
 std::string scan_topic = "/scan";
 std::string publish_topic = "/brake";
 class Safety : public rclcpp::Node {
