@@ -51,19 +51,20 @@ private:
 
     rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr laser_sub_;
     rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr odom_sub_;
+    
 
     void timer_callback()
     {
-      if(should_brake_ == true)
-      {
-        twist_pub_->publish(brake_msg_);
-        RCLCPP_INFO(rclcpp::get_logger("\033[1;33mAES\033[1;0m"), ": \033[1;31mBreaking\033[1;0m");
-      }
-      else 
-      { 
-        RCLCPP_INFO(rclcpp::get_logger("\033[1;33mAES\033[1;0m"), ": \033[1;32mReleased\033[1;0m"); 
-        RCLCPP_INFO(rclcpp::get_logger("\033[1;33mAES\033[1;0m"), ": \033[1;33mTTC_Final : %.4f\033[1;0m", TTC_final_threshold);
-        }
+    //   if(should_brake_ == true)
+    //   {
+    //     twist_pub_->publish(brake_msg_);
+    //     RCLCPP_INFO(rclcpp::get_logger("\033[1;33mAES\033[1;0m"), ": \033[1;31mBreaking\033[1;0m");
+    //   }
+    //   else 
+    //   { 
+    //     RCLCPP_INFO(rclcpp::get_logger("\033[1;33mAES\033[1;0m"), ": \033[1;32mReleased\033[1;0m"); 
+    //     RCLCPP_INFO(rclcpp::get_logger("\033[1;33mAES\033[1;0m"), ": \033[1;33mTTC_Final : %.4f\033[1;0m", TTC_final_threshold);
+    //     }
     }
 
     void scan_callback(const sensor_msgs::msg::LaserScan::ConstSharedPtr scan_msg) 
@@ -73,7 +74,7 @@ private:
         TTC_final_threshold = this->get_parameter("ttc_final").as_double(); // seconds
         
         double min_TTC = 1000000.0;
-        double velocity_x = odom_velocity_x_;
+        double velocity_x = this->odom_velocity_x_;
         
         // 180 ပဲယူမယ်။ ဘာလို့ဆို lidar က 360 ိ ဖြစ်နေလို့ပါ။
         for (unsigned int i = 90; i < 270; i++) 
@@ -82,12 +83,18 @@ private:
             if (!std::isinf(scan_msg->ranges[i]) && !std::isnan(scan_msg->ranges[i])) 
             {
                 double distance = scan_msg->ranges[i];
+
+               
                 double angle = scan_msg->angle_min + scan_msg->angle_increment * i;
-                double distance_derivative = cos(angle) * velocity_x; 
+                double distance_derivative = cos(angle) * velocity_x;     // FOUND ERROR
+
+                 RCLCPP_INFO(rclcpp::get_logger("\033[1;33mAES\033[1;0m"), ": \033[1;33mdistance_derivative : %.4f\033[1;0m", distance_derivative);
                 
                 if ( distance_derivative > 0 && (distance/distance_derivative) < min_TTC ) 
                 {
-                    min_TTC = distance / distance_derivative;
+                    min_TTC = distance / std::max(distance_derivative, 0.001);
+                     RCLCPP_INFO(rclcpp::get_logger("\033[1;33mAES\033[1;0m"), ": \033[1;33mmin_TTC : %.4f\033[1;0m", min_TTC);
+                
                 }
             }
         }
@@ -99,8 +106,8 @@ private:
     }
     void odom_callback(const nav_msgs::msg::Odometry::ConstSharedPtr odom_msg)
     {
-        odom_velocity_x_ = odom_msg->twist.twist.linear.x;
-        odom_velocity_y_ = odom_msg->twist.twist.linear.y;
+        this->odom_velocity_x_ = odom_msg->twist.twist.linear.x;
+        this->odom_velocity_y_ = odom_msg->twist.twist.linear.y;
     }
 
 };
