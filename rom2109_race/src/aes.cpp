@@ -11,9 +11,13 @@
 using namespace std::chrono_literals;
 using std::placeholders::_1;
 
-std::string odom_topic = "/odom";
+std::string odom_topic = "/diff_cont/odom";
 std::string scan_topic = "/scan";
-std::string publish_topic = "/brake";
+std::string publish_topic = "/aeb/cmd_vel";
+std::string aeb_topic = "aeb_status";
+
+
+
 class Safety : public rclcpp::Node {
 
 public:
@@ -29,6 +33,7 @@ public:
         odom_sub_ = this->create_subscription<nav_msgs::msg::Odometry>(odom_topic, 10, std::bind(&Safety::odom_callback, this, _1));
 
         twist_pub_ = this->create_publisher<geometry_msgs::msg::Twist>(publish_topic, 10);
+        brake_pub_ = this->create_publisher<std_msgs::msg::Bool>(aeb_topic, 10); //brake topic 
 
         timer_ = this->create_wall_timer( 100ms, std::bind(&Safety::timer_callback, this) );
 
@@ -48,6 +53,7 @@ private:
     rclcpp::TimerBase::SharedPtr timer_;
 
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr twist_pub_;
+    rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr brake_pub_;
 
     rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr laser_sub_;
     rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr odom_sub_;
@@ -55,11 +61,14 @@ private:
 
     void timer_callback()
     {
-    //   if(should_brake_ == true)
-    //   {
-    //     twist_pub_->publish(brake_msg_);
-    //     RCLCPP_INFO(rclcpp::get_logger("\033[1;33mAES\033[1;0m"), ": \033[1;31mBreaking\033[1;0m");
-    //   }
+      if(should_brake_ == true)
+      { 
+          std_msgs::msg::Bool brake_status_;
+          brake_status_.data = should_brake_;
+          brake_pub_->publish(brake_status_);
+        // twist_pub_->publish(brake_msg_);
+        RCLCPP_INFO(rclcpp::get_logger("\033[1;33mAES\033[1;0m"), ": \033[1;31mBreaking\033[1;0m");
+      }
     //   else 
     //   { 
     //     RCLCPP_INFO(rclcpp::get_logger("\033[1;33mAES\033[1;0m"), ": \033[1;32mReleased\033[1;0m"); 
@@ -77,23 +86,31 @@ private:
         double velocity_x = this->odom_velocity_x_;
         
         // 180 ပဲယူမယ်။ ဘာလို့ဆို lidar က 360 ိ ဖြစ်နေလို့ပါ။
-        for (unsigned int i = 90; i < 270; i++) 
-        {
+        // for (unsigned int i = 90; i < 270; i++) 
+        // {
             //RCLCPP_INFO(this->get_logger(), "ranges i : %d", i);
-            if (!std::isinf(scan_msg->ranges[i]) && !std::isnan(scan_msg->ranges[i])) 
+
+            //if (!std::isinf(scan_msg->ranges[i]) && !std::isnan(scan_msg->ranges[i]))  
+
+            // lidar angle filter ထည့်ရန်
+
+            for (std::size_t i = 0; i < scan_msg->ranges.size(); i++) {
             {
                 double distance = scan_msg->ranges[i];
 
-               
+                if (std::isnan(distance) || std::isinf(distance) || distance < scan_msg->range_min) {
+                continue;
+            }
+            
                 double angle = scan_msg->angle_min + scan_msg->angle_increment * i;
-                double distance_derivative = cos(angle) * velocity_x;     // FOUND ERROR
+                double distance_derivative = cos(angle) * velocity_x;    
 
-                 RCLCPP_INFO(rclcpp::get_logger("\033[1;33mAES\033[1;0m"), ": \033[1;33mdistance_derivative : %.4f\033[1;0m", distance_derivative);
+                // RCLCPP_INFO(rclcpp::get_logger("\033[1;33mAES\033[1;0m"), ": \033[1;distance_derivative: %.4f\033[1;0m", distance_derivative);
                 
                 if ( distance_derivative > 0 && (distance/distance_derivative) < min_TTC ) 
                 {
                     min_TTC = distance / std::max(distance_derivative, 0.001);
-                     RCLCPP_INFO(rclcpp::get_logger("\033[1;33mAES\033[1;0m"), ": \033[1;33mmin_TTC : %.4f\033[1;0m", min_TTC);
+                    // RCLCPP_INFO(rclcpp::get_logger("\033[1;33mAES\033[1;0m"), ": \033[1;33mmin_TTC : %.4f\033[1;0m", min_TTC);
                 
                 }
             }
@@ -111,9 +128,19 @@ private:
     }
 
 };
-int main(int argc, char ** argv) {
-    rclcpp::init(argc, argv);
-    rclcpp::spin(std::make_shared<Safety>());
-    rclcpp::shutdown();
-    return 0;
-}
+
+
+// rom_dynamics::vechicle::Aeb_diff_drive::Aeb_diff_drive(int argc, char ** argv){
+//     rclcpp::init(argc, argv);
+//     rclcpp::spin(std::make_shared<Safety>());
+//     rclcpp::shutdown();
+// }
+
+
+
+// int main(int argc, char ** argv) {
+//     rclcpp::init(argc, argv);
+//     rclcpp::spin(std::make_shared<Safety>());
+//     rclcpp::shutdown();
+//     return 0;
+// }

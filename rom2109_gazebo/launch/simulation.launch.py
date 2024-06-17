@@ -101,7 +101,7 @@ def generate_launch_description():
             rviz_node,
             spawn_robot_node,
             #joystick_launch,
-            twist_mux_node,
+            #twist_mux_node,
             diff_drive_spawner,
             joint_broad_spawner,
         ]

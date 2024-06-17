@@ -81,7 +81,7 @@ def generate_launch_description():
         package="twist_mux",
         executable="twist_mux",
         parameters=[twist_mux_params],
-        remappings=[('/cmd_vel_out', '/diff_cont/cmd_vel_unstamped')]
+        remappings=[('/cmd_vel_out', '/diff/cmd_vel_unstamped')]
     )
 
     diff_drive_spawner = Node(
@@ -106,7 +106,7 @@ def generate_launch_description():
             rviz_node,
             spawn_robot_node,
             #joystick_launch,
-            #twist_mux_node,
+            twist_mux_node,
             diff_drive_spawner,
             joint_broad_spawner,
         ]
