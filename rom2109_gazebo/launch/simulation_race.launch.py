@@ -57,14 +57,27 @@ def generate_launch_description():
         }.items(),
     )
 
-    spawn_robot_node = Node(
+    # spawn_robot_node = Node(
+    #     package='gazebo_ros',
+    #     executable='spawn_entity.py',
+    #     # arguments=['-database', 'rom2109_tall_ros', '-entity', 'rom2109_tall_ros',
+    #     arguments=['-file', urdf_file, '-entity', 'rom2109_tall',
+    #     #arguments=['-entity', 'rom2109_tall_ros', '-topic', 'robot_description',
+    #                "-x", '-9.0',
+    #                "-y", '-5.0',
+    #                "-z", '0.3'],
+    #     output='screen'
+    # )
+
+    spawn_robot_node = Node(    #new_added spawn launch
         package='gazebo_ros',
         executable='spawn_entity.py',
         # arguments=['-database', 'rom2109_tall_ros', '-entity', 'rom2109_tall_ros',
-        arguments=['-file', urdf_file, '-entity', 'rom2109_tall',
-        #arguments=['-entity', 'rom2109_tall_ros', '-topic', 'robot_description',
-                   "-x", '-9.0',
-                   "-y", '-5.0',
+        #arguments=['-file', urdf_file, '-entity', 'rom2109_tall_psa',
+        #arguments=['-topic', "/robot_description", '-entity', 'rom2109_tall',
+        arguments=['-entity', 'rom2109_tall', '-topic', '/robot_description', # change the arguments pos 
+                   "-x", '0.0',
+                   "-y", '0.0',
                    "-z", '0.3'],
         output='screen'
     )

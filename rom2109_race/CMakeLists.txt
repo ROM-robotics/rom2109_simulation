@@ -40,15 +40,23 @@ ament_target_dependencies(linear_run
 # )
 
 
-add_executable(test_code src/test.cpp)
-ament_target_dependencies(test_code 
-  rclcpp geometry_msgs nav_msgs sensor_msgs std_msgs
-)
+# add_executable(test_code src/test.cpp)
+# ament_target_dependencies(test_code 
+#   rclcpp geometry_msgs nav_msgs sensor_msgs std_msgs
+# )
+
+
+add_executable(aeb  src/rom_aeb.cpp src/main.cpp src/laser_angle_filter)
+ament_target_dependencies(aeb rclcpp std_msgs sensor_msgs nav_msgs geometry_msgs)
+
+
 # Install Cpp executables
 install(TARGETS
+  
+  aeb
   linear_run
   #aes_run
-  test_code
+  #test_code
   DESTINATION lib/${PROJECT_NAME})
 
 install(
