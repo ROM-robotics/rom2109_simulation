@@ -1,0 +1,4 @@
+source;share/rom2109_race/local_setup.bash
+source;share/rom2109_race/local_setup.dsv
+source;share/rom2109_race/local_setup.sh
+source;share/rom2109_race/local_setup.zsh

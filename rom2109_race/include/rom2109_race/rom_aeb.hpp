@@ -15,10 +15,18 @@ namespace rom_dynamics
         public:
             AEB();
             
-            
+            bool shouldBerak(const sensor_msgs::msg::LaserScan::ConstSharedPtr scan_msg, const nav_msgs::msg::Odometry::ConstSharedPtr odom_msg);
+            {
+                // laser filtering
+                computeAEB();
+            }
             double computeAEB(double desire, double actual, double dt, double min, double max);
             ~AEB();
         private:
+            double odom_x;
+            double odom_y;
+            scan
+            bool should_break_;
             
         };
         AEB::AEB() : 
@@ -27,7 +35,7 @@ namespace rom_dynamics
             //RCLCPP_INFO(rclcpp::get_logger("\033[1;33mPID\033[1;0m"), ": \033[1;32mKi : %.4f\033[1;0m", this->ki_); 
             //RCLCPP_INFO(rclcpp::get_logger("\033[1;33mPID\033[1;0m"), ": \033[1;32mKd : %.4f\033[1;0m", this->kd_); 
         }
-        double AEB::computeAEB(double desire, double actual, double dt, double min, double max)
+        double AEB::computeAEB()
         {
             
             return pidTerm;

@@ -1,0 +1,97 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-c9136cf2a12892bc38de.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "rom2109_race",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "aes_run::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-aes_run-Debug-e8786a27721253f74d60.json",
+					"name" : "aes_run",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "linear_run::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-linear_run-Debug-dabdc3fb40e95f6ed648.json",
+					"name" : "linear_run",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "rom2109_race_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-rom2109_race_uninstall-Debug-67e573d6c1f0077ce87e.json",
+					"name" : "rom2109_race_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_code::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_code-Debug-95fcbebaf12b7a3af447.json",
+					"name" : "test_code",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-Debug-10a1d552169cbb26216a.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_race/build",
+		"source" : "/home/mr_robot/ros2/developer_ws/src/rom2109_simulation/rom2109_race"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}
