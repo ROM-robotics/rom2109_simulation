@@ -20,7 +20,7 @@ name=$HOME
 str1="$HOME/.gazebo"
 sed -i "s|/home/mr_robot/.gazebo|$str1|" ./rom2109_description/urdf/urdf.urdf
 str2="<parameters>$ros2_ws_path"
-sed -i "s|<parameters>/home/mr_robot/ros2/developer_ws|$str2|" ./rom2109_description/urdf/yoururdf.urdf
+sed -i "s|<parameters>/home/mr_robot/ros2/developer_ws|$str2|" ./rom2109_description/urdf/lidarbot.urdf
 
 # Remove cafe.world
 rm ./rom2109_gazebo/worlds/cafe.world

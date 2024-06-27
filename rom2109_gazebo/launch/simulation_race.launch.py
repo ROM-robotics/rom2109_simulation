@@ -17,7 +17,7 @@ def generate_launch_description():
     description_pkg = get_package_share_directory('rom2109_description')
     default_world_path = os.path.join(race_pkg, 'worlds', 'single_square.world')
 
-    urdf_file = os.path.join(description_pkg,'urdf', 'yoururdf.urdf')
+    urdf_file = os.path.join(description_pkg,'urdf', 'lidarbot.urdf')
     # robot_description_config = xacro.process_file(xacro_file)
     # my_xml = robot_description_config.toxml()
 

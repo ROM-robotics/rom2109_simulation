@@ -8,7 +8,7 @@
     <!-- <xacro:include filename="hw_ros2_control.xacro" />  -->
     <!-- <xacro:include filename="gazebo_control.xacro" /> -->
 
-    <xacro:include filename="camera.xacro" />
+    <!--xacro:include filename="camera.xacro" /-->
     <!-- <xacro:include filename="camera3d.xacro" /> -->
 
 </robot>

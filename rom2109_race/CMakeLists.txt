@@ -30,24 +30,20 @@ include_directories(
   include
 )
 
-add_executable(linear_run src/linear.cpp)
-ament_target_dependencies(linear_run 
-  rclcpp geometry_msgs nav_msgs sensor_msgs std_msgs
-)
-add_executable(aes_run src/aes.cpp)
-ament_target_dependencies(aes_run 
-  rclcpp geometry_msgs nav_msgs sensor_msgs std_msgs
-)
+#add_executable(linear_run src/linear.cpp)
+#ament_target_dependencies(linear_run rclcpp geometry_msgs nav_msgs sensor_msgs std_msgs)
 
-add_executable(test_code src/test.cpp)
-ament_target_dependencies(test_code 
-  rclcpp geometry_msgs nav_msgs sensor_msgs std_msgs
-)
+#add_executable(aes_run src/aes.cpp)
+#ament_target_dependencies(aes_run rclcpp geometry_msgs nav_msgs sensor_msgs std_msgs)
+
+#add_executable(test_code src/test.cpp)
+#ament_target_dependencies(test_code rclcpp geometry_msgs nav_msgs sensor_msgs std_msgs)
+
 # Install Cpp executables
 install(TARGETS
-  linear_run
-  aes_run
-  test_code
+#  linear_run
+#  aes_run
+#  test_code
   DESTINATION lib/${PROJECT_NAME})
 
 install(

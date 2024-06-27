@@ -16,7 +16,7 @@ windows:
   - EKF: 
       root: ~/
       panes:
-        - clear; source ~/.bashrc; ros2 launch rom2109_gazebo ekf.launch.py publish_tf:=False use_sim_time:=True
+        - clear; #source ~/.bashrc; ros2 launch rom2109_gazebo ekf.launch.py publish_tf:=False use_sim_time:=True
   - SlamToolBox: 
       root: ~/
       panes:
