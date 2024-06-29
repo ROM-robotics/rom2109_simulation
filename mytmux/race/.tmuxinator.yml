@@ -20,7 +20,7 @@ windows:
   - RUN: 
       root: ~/
       panes:
-        - clear; source ~/.bashrc; 
+        - clear; source ~/.bashrc; ros2 run teleop_twist_keyboard teleop_twist_keyboard /cmd_vel:=/cmd_vel_keyboard
   - PID: 
       root: ~/
       panes:

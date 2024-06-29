@@ -36,6 +36,8 @@ namespace rom_dynamics
                 {
                     return min_ttc_;
                 }
+                double getDistance() { return distance_; }
+                double getVelocity() { return velocity_; }
             private:
                 geometry_msgs::msg::Twist brake_msg_;
                 geometry_msgs::msg::Twist input_vel_;
@@ -48,6 +50,8 @@ namespace rom_dynamics
                 double odom_velocity_x_ = 0.0;
                 double odom_velocity_y_ = 0.0;
                 bool should_brake_;
+                double distance_;
+                double velocity_;
        };
 
     };

@@ -57,13 +57,15 @@ bool rom_dynamics::vechicle::Aeb::should_brake(const sensor_msgs::msg::LaserScan
         // velocity 0 ထက်ကြီးပြီး time( obstacle ဆီရောက်မည့်အချိန် ) က minttc ထက်ငယ်ရင် 
         if (distance_derivative >= 0 && (distance/distance_derivative) < min_ttc_) 
         {   //  min_ttc_ ကို လျော့
-            min_ttc_ = distance / std::max(distance_derivative, 0.001); // max() သုံးတာက  0.001 ထက်မငယ်စေဖို့
-            //min_ttc_ = (distance / distance_derivative);
+            //min_ttc_ = distance / std::max(distance_derivative, 0.001); // max() သုံးတာက  0.001 ထက်မငယ်စေဖို့
+            if(distance_derivative == 0) { min_ttc_ = min_ttc_; }
+            else { min_ttc_ = (distance / distance_derivative); }
         }
 
         // တကြောင်းထဲတွက်
         // if (distance/std::max(velocity_x * cos(filtered_scan->angle_min + (double)i * scan_msg->angle_increment),0.001) < ttc;
-
+        distance_ = distance;
+        velocity_ = distance_derivative;
 
     }
     if (min_ttc_ <= ttc_final_threshold_)
