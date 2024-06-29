@@ -102,7 +102,7 @@ void LinearPublisher::timer_callback()
         twist_publisher_->publish(msg);
         RCLCPP_INFO(rclcpp::get_logger("\033[1;36mLinear Velocity\033[1;0m"), ": \033[1;36m%.4f m/s\033[1;0m", msg.linear.x);
     }
-
+    RCLCPP_INFO(rclcpp::get_logger("\033[1;34mTTC\033[1;0m"), ": \033[1;36m%.4f m/s\033[1;0m", msg.linear.x);
    
 }
 

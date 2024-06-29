@@ -5,15 +5,16 @@ using namespace std::chrono_literals;
 rom_dynamics::vechicle::Aeb::Aeb()
 {
     ttc_final_threshold_ = 1.0;
+    min_ttc_ = 1000000.0;
 }
 rom_dynamics::vechicle::Aeb::Aeb(double ttc_final)
 {
     ttc_final_threshold_ = ttc_final;
+    min_ttc_ = 1000000.0;
 }
 
 bool rom_dynamics::vechicle::Aeb::should_brake(const sensor_msgs::msg::LaserScan::ConstSharedPtr scan_msg, const nav_msgs::msg::Odometry::ConstSharedPtr odom_msg , double min_angle , double max_angle)
 {
-    double min_TTC = 1000000.0;
     double velocity_x = odom_msg->twist.twist.linear.x;
 
     //LASER ANGLE FILTER 
@@ -54,10 +55,10 @@ bool rom_dynamics::vechicle::Aeb::should_brake(const sensor_msgs::msg::LaserScan
         
         // v = s/t , t = s/v
         // velocity 0 ထက်ကြီးပြီး time( obstacle ဆီရောက်မည့်အချိန် ) က minttc ထက်ငယ်ရင် 
-        if (distance_derivative > 0 && (distance/distance_derivative) < min_TTC) 
-        {   //  min_TTC ကို လျော့
-            //min_TTC = distance / std::max(distance_derivative, 0.001); // max() သုံးတာက  0.001 ထက်မငယ်စေဖို့
-            min_TTC = distance / distance_derivative;
+        if (distance_derivative >= 0 && (distance/distance_derivative) < min_ttc_) 
+        {   //  min_ttc_ ကို လျော့
+            min_ttc_ = distance / std::max(distance_derivative, 0.001); // max() သုံးတာက  0.001 ထက်မငယ်စေဖို့
+            //min_ttc_ = (distance / distance_derivative);
         }
 
         // တကြောင်းထဲတွက်
@@ -65,7 +66,7 @@ bool rom_dynamics::vechicle::Aeb::should_brake(const sensor_msgs::msg::LaserScan
 
 
     }
-    if (min_TTC <= ttc_final_threshold_)
+    if (min_ttc_ <= ttc_final_threshold_)
     {
         should_brake_ = true;
     }

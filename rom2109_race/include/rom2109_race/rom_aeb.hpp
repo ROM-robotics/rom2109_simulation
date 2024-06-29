@@ -32,12 +32,17 @@ namespace rom_dynamics
                 {
                     return ttc_final_threshold_;
                 }
+                double getMinTtc()
+                {
+                    return min_ttc_;
+                }
             private:
                 geometry_msgs::msg::Twist brake_msg_;
                 geometry_msgs::msg::Twist input_vel_;
 
                 std_msgs::msg::Bool brake_status_;
                 double ttc_final_threshold_;
+                double min_ttc_;
                 double ttc_mid_threshold_;
                 double ttc_start_threshold_;
                 double odom_velocity_x_ = 0.0;
