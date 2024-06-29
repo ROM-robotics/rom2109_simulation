@@ -10,126 +10,118 @@
 #include "sensor_msgs/msg/laser_scan.hpp"
 #include "nav_msgs/msg/odometry.hpp"
 
+#include "rom2109_race/rom_aeb.hpp"
+
 std::string odom_topic = "/diff_cont/odom";
 std::string scan_topic = "/scan";
+std::string twist_topic= "/linear_vel";
 
 using namespace std::chrono_literals;
 
 class LinearPublisher : public rclcpp::Node
 {
-  public:
+public:
     LinearPublisher();
 
-  private:
+private:
     void timer_callback();
-    void scan_callback(const sensor_msgs::msg::LaserScan::ConstSharedPtr scan_msg);
-    void odom_callback(const nav_msgs::msg::Odometry::ConstSharedPtr odom_msg);
+    void scan_callback(const sensor_msgs::msg::LaserScan::SharedPtr scan_msg);
+    void odom_callback(const nav_msgs::msg::Odometry::SharedPtr odom_msg);
 
     rclcpp::TimerBase::SharedPtr timer_;
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr twist_publisher_;
-    rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr laser_sub_;   // subscribers
+    rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr laser_sub_;
     rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr odom_sub_;
     int count_;
     geometry_msgs::msg::Twist msg;
     geometry_msgs::msg::Twist::SharedPtr msg_ptr;
-    nav_msgs::msg::Odometry::ConstSharedPtr odom_msg_;
-    double odom_velocity_x_;
-    double odom_velocity_y_ ;
 
-    sensor_msgs::msg::LaserScan::ConstSharedPtr scan_msg_;
+    double odom_velocity_x_;
+    double odom_velocity_y_;
+
     double min_angle_;
     double max_angle_;
 
-    romrobotics::Vehicle::AEB aeb_;
-    romrobotics::Control::PID pid_;
+    sensor_msgs::msg::LaserScan::SharedPtr scan_msg_;
+    nav_msgs::msg::Odometry::SharedPtr odom_msg_;
 };
 
-LinearPublisher::LinearPublisher() : Node("linear_publisher"), count_(60)
+LinearPublisher::LinearPublisher() : Node("linear_publisher"), count_(0)
 {
-      if( !this->has_parameter("linear_speed") )
-        {
-            this->declare_parameter("linear_speed", 1.0); // 1 ms
-        }
-      this->declare_parameter("min_angle", -90.0);  // degree
-      this->declare_parameter("max_angle", 90.0);
+    if (!this->has_parameter("linear_speed"))
+    {
+        this->declare_parameter("linear_speed", 1.0); // 1 m/s
+    }
+    this->declare_parameter("min_angle", -90.0); // degree
+    this->declare_parameter("max_angle", 90.0);
+    this->declare_parameter("ttc_final", 1.0);
 
-      twist_publisher_ = this->create_publisher<geometry_msgs::msg::Twist>("/linear_vel", 10);
-      laser_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>(scan_topic, 10, std::bind(&LinearPublisher::scan_callback, this, std::placeholders::_1));
-      odom_sub_ = this->create_subscription<nav_msgs::msg::Odometry>(odom_topic, 10, std::bind(&LinearPublisher::odom_callback, this, std::placeholders::_1));
+    twist_publisher_ = this->create_publisher<geometry_msgs::msg::Twist>(twist_topic, 10);
+    laser_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>(scan_topic, 10, std::bind(&LinearPublisher::scan_callback, this, std::placeholders::_1));
+    odom_sub_ = this->create_subscription<nav_msgs::msg::Odometry>(odom_topic, 10, std::bind(&LinearPublisher::odom_callback, this, std::placeholders::_1));
 
-      timer_ = this->create_wall_timer(100ms, std::bind(&LinearPublisher::timer_callback, this));
+    timer_ = this->create_wall_timer(100ms, std::bind(&LinearPublisher::timer_callback, this));
 
-      msg.linear.x = 0.0;
-      msg.angular.z = 0.0;
+    msg.linear.x = 0.0;
+    msg.angular.z = 0.0;
 
-      odom_velocity_x_ = 0.0;
-      odom_velocity_y_ = 0.0;
+    odom_velocity_x_ = 0.0;
+    odom_velocity_y_ = 0.0;
 }
 
 void LinearPublisher::timer_callback()
-{ 
-      /* 
-      int timer_second = count_/10;
+{
+    if (!scan_msg_ || !odom_msg_)
+    {
+        return; // Ensure both messages have been received before processing
+    }
 
-      if(count_ % 10 == 0 && count_ >= 0)
-      { // တစက်ကန့် တခါ timer ပြဖို့ ပါ။
-        RCLCPP_INFO(this->get_logger(), "Ready to go !: %d", timer_second);
-      }
-      count_--;
+    // auto input_scan = std::make_shared<sensor_msgs::msg::LaserScan>(*scan_msg_);
+    // auto input_odom = std::make_shared<nav_msgs::msg::Odometry>(*odom_msg_);
 
-      if(count_ < 0)
-      { // ၆ စက်ကန့် ပြီး ရင် မောင်းမယ်။
+    double min_angle = this->get_parameter("min_angle").as_double();
+    double max_angle = this->get_parameter("max_angle").as_double();
+
+    double ttc_threshold = 1.0;
+    ttc_threshold = this->get_parameter("ttc_final").as_double(); // seconds // please try default value
+
+    rom_dynamics::vechicle::Aeb rom_aeb(ttc_threshold);
+
+    bool flag = rom_aeb.should_brake(scan_msg_, odom_msg_, min_angle, max_angle);
+
+    if (flag == true)
+    {
+        msg.linear.x = 0.0;
+        twist_publisher_->publish(msg);
+        RCLCPP_INFO(rclcpp::get_logger("\033[1;36mBraking\033[1;0m"), ": \033[1;36m%.4f m/s\033[1;0m", msg.linear.x);
+    }
+    else
+    {
         double linear_speed = this->get_parameter("linear_speed").as_double();
         msg.linear.x = linear_speed;
         twist_publisher_->publish(msg);
+        RCLCPP_INFO(rclcpp::get_logger("\033[1;36mLinear Velocity\033[1;0m"), ": \033[1;36m%.4f m/s\033[1;0m", msg.linear.x);
+    }
 
-        if(count_ % -5 == 0)
-        { // ၆ စက်ကန့်ပြီးရင် တစက်ကန့် ကို ၂ ခါ display ပြရန်။
-          RCLCPP_INFO(rclcpp::get_logger("\033[1;36mLinear Velocity\033[1;0m"), ": \033[1;36m%.4f m/s\033[1;0m", msg.linear.x);
-        }
-      }
-      */
-      double linear_speed = calculatePID(aeb_speed); // accel , decel  = this->get_parameter("linear_speed").as_double();
-      bool flag = shouldBrake(scan,);
-
-      double pid_speed;
-      if(flag) 
-      {
-        // // deceleration
-        pid_speed = calculatePID(linear_speed);
-        // checkHeading(); // VFF angular velocity
-      } 
-      else
-      {
-        pid_speed = calculatePID(linear_speed); // accel 
-      }
-      
-      
-      msg.linear.x = pid_speed;
-
-      
-      twist_publisher_->publish(msg);
-     
+   
 }
 
-void LinearPublisher::scan_callback(const sensor_msgs::msg::LaserScan::ConstSharedPtr msg) 
+void LinearPublisher::scan_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
 {
-    min_angle_ = this->get_parameter("min_angle").as_double();   //laser rays ရဲ့ angle ကို dynamically ချိန်ညှိနိုင်ရန် နှင့် parameter သတ်မှတ်ရလွယ်ကူစေရန်
-    max_angle_ = this->get_parameter("max_angle").as_double();
     scan_msg_ = msg;
 }
 
-void LinearPublisher::odom_callback(const nav_msgs::msg::Odometry::ConstSharedPtr msg) 
+void LinearPublisher::odom_callback(const nav_msgs::msg::Odometry::SharedPtr msg)
 {
-    this->odom_velocity_x_ = msg->twist.twist.linear.x;
-    this->odom_velocity_y_ = msg->twist.twist.linear.y;
+    odom_velocity_x_ = msg->twist.twist.linear.x;
+    odom_velocity_y_ = msg->twist.twist.linear.y;
     odom_msg_ = msg;
 }
 
-int main(int argc, char * argv[])
+int main(int argc, char **argv)
 {
-  rclcpp::init(argc, argv);
-  rclcpp::spin(std::make_shared<LinearPublisher>());
-  rclcpp::shutdown();
-  return 0;
+    rclcpp::init(argc, argv);
+    rclcpp::spin(std::make_shared<LinearPublisher>());
+    rclcpp::shutdown();
+    return 0;
 }

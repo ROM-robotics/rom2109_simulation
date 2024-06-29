@@ -1,74 +1,75 @@
 #include "rom2109_race/rom_aeb.hpp"
-#include "rom2109_race/laser_angle_filter.hpp"
 
 using namespace std::chrono_literals;
 
+rom_dynamics::vechicle::Aeb::Aeb()
+{
+    ttc_final_threshold_ = 1.0;
+}
+rom_dynamics::vechicle::Aeb::Aeb(double ttc_final)
+{
+    ttc_final_threshold_ = ttc_final;
+}
 
-std::string publish_topic = "/diff_cont/cmd_vel_unstamped";
-std::string aeb_topic = "/aeb_status";
-std::string laser_filtered_topic = "/filtered_scan";
-std::string input_velocity_topic = "/aeb/input_vel";
+bool rom_dynamics::vechicle::Aeb::should_brake(const sensor_msgs::msg::LaserScan::ConstSharedPtr scan_msg, const nav_msgs::msg::Odometry::ConstSharedPtr odom_msg , double min_angle , double max_angle)
+{
+    double min_TTC = 1000000.0;
+    double velocity_x = odom_msg->twist.twist.linear.x;
 
+    //LASER ANGLE FILTER 
+    auto const filtered_scan = std::make_shared<sensor_msgs::msg::LaserScan>(*scan_msg);
+    filtered_scan->ranges.clear();
 
+    double angle_min = min_angle * M_PI / 180.0;  //degree to radian
+    double angle_max = max_angle * M_PI / 180.0;  //degree to radian
+    double current_angle = scan_msg->angle_min;
 
-rom_dynamics::vechicle::AEB::AEB() : Node("Rom_AEB_Node") {
-    if (!this->has_parameter("ttc_final")) {
-        this->declare_parameter("ttc_final", 1.0);
+    for (const auto &range : scan_msg->ranges)
+    {
+        if (current_angle >= angle_min && current_angle <= angle_max)
+        {
+            filtered_scan->ranges.push_back(range);
+        }
+        else
+        {
+            filtered_scan->ranges.push_back(std::numeric_limits<double>::infinity());
+        }
+        current_angle += scan_msg->angle_increment;
     }
 
-    if( !this->has_parameter("min_angle") && !this->has_parameter("max_angle") )
-        {
-            this->declare_parameter("min_angle", -30.0);
-            this->declare_parameter("max_angle", 30.0);
+    //CALCULATE AEB 
+    for (std::size_t i = 0; i < filtered_scan->ranges.size(); i++) 
+    {
+
+        double distance = filtered_scan->ranges[i];
+        if (std::isnan(distance) || std::isinf(distance) || distance < filtered_scan->range_min) 
+        {  // containue if laser data were non and inf and < min_range 
+            continue;
         }
 
-    // bool should_brake_ = false;
+        double angle = filtered_scan->angle_min + filtered_scan->angle_increment * (double)i; 
+        // base frame ရဲ့ velocity x နဲ့ အတူ laser_range ကို velocity အပြိုင်ပေးခြင်း
+        // distance ကို ရှိတ်တဲ့ velocity တန်ဖိုးကို cos တွက်ပြီး weight အနေနဲ့သုံးတယ်။
+        double distance_derivative = cos(angle) * velocity_x;    
+        
+        // v = s/t , t = s/v
+        // velocity 0 ထက်ကြီးပြီး time( obstacle ဆီရောက်မည့်အချိန် ) က minttc ထက်ငယ်ရင် 
+        if (distance_derivative > 0 && (distance/distance_derivative) < min_TTC) 
+        {   //  min_TTC ကို လျော့
+            //min_TTC = distance / std::max(distance_derivative, 0.001); // max() သုံးတာက  0.001 ထက်မငယ်စေဖို့
+            min_TTC = distance / distance_derivative;
+        }
 
-    // double min_angle = this->get_parameter("min_angle").as_double();   //laser rays ရဲ့ angle ကို dynamically ချိန်ညှိနိုင်ရန် နှင့် parameter သတ်မှတ်ရလွယ်ကူစေရန်
-    // double max_angle = this->get_parameter("max_angle").as_double();
-
-    // TTC_final_threshold = this->get_parameter("ttc_final").as_double(); // second
-
-    
-
-    twist_pub_ = this->create_publisher<geometry_msgs::msg::Twist>(publish_topic, 10);
-    vel_subscription_ = this->create_subscription<geometry_msgs::msg::Twist>(
-            input_velocity_topic, 10, std::bind(&rom_dynamics::vechicle::AEB::velocity_subscription, this, std::placeholders::_1));
+        // တကြောင်းထဲတွက်
+        // if (distance/std::max(velocity_x * cos(filtered_scan->angle_min + (double)i * scan_msg->angle_increment),0.001) < ttc;
 
 
-    brake_pub_ = this->create_publisher<std_msgs::msg::Bool>(aeb_topic, 10); //brake topic 
-    laser_filtered_pub_ = this->create_publisher<sensor_msgs::msg::LaserScan>(laser_filtered_topic, 10);     // laser_angle_filter အတွက် publisher 
-
-    timer_ = this->create_wall_timer(100ms, std::bind(&AEB::timer_callback, this));
-
-    brake_msg_.linear.x = 0.0000;
-    brake_msg_.angular.z = 0.0000;
-
-    RCLCPP_INFO(rclcpp::get_logger("\033[1;33mAES\033[1;0m"), ": \033[1;33mTTC_Final : %.4f\033[1;0m", TTC_final_threshold);
-}
-
-void rom_dynamics::vechicle::AEB::timer_callback() {
-    if (should_brake_ == true) { 
-       
-        brake_status_.data = should_brake_;
-        brake_pub_->publish(brake_status_);
-        twist_pub_->publish(brake_msg_);
-        RCLCPP_INFO(rclcpp::get_logger("\033[1;33mAES\033[1;0m"), ": \033[1;31mBreaking\033[1;0m");
     }
-    else { 
-        RCLCPP_INFO(rclcpp::get_logger("\033[1;33mAES\033[1;0m"), ": \033[1;32mReleased\033[1;0m"); 
-        RCLCPP_INFO(rclcpp::get_logger("\033[1;33mAES\033[1;0m"), ": \033[1;33mTTC_Final : %.4f\033[1;0m", TTC_final_threshold);
-        brake_status_.data = should_brake_;
-        brake_pub_->publish(brake_status_);
-        twist_pub_->publish(input_vel_);
+    if (min_TTC <= ttc_final_threshold_)
+    {
+        should_brake_ = true;
     }
-}
 
-
-
-void rom_dynamics::vechicle::AEB::velocity_subscription(const geometry_msgs::msg::Twist::ConstSharedPtr vel_msg){
-
-    this->input_vel_.linear = vel_msg->linear;
-    this->input_vel_.angular = vel_msg->angular;
+    return should_brake_;
 
 }

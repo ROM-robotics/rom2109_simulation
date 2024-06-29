@@ -1,46 +1,51 @@
-// Copyright 2024 ROM DYNAMICS TEAM
-//
-#ifndef ROM_DYNAMIC_AEB_CLASS
-#define ROM_DYNAMIC_AEB_CLASS
+#ifndef ROM_DYNAMICS_AEB
+#define ROM_DYNAMICS_AEB
+#pragma once
 
 #include "rclcpp/rclcpp.hpp"
+#include "std_msgs/msg/bool.hpp"
+#include "sensor_msgs/msg/laser_scan.hpp"
+#include "nav_msgs/msg/odometry.hpp"
+#include "geometry_msgs/msg/twist.hpp"
+#include <chrono>
+#include <functional>
+#include <memory>
+#include <string>
 
 namespace rom_dynamics
 {
     namespace vechicle
     {
+        class Aeb
+        {
+            public:
+                Aeb();
+                Aeb(double ttc_final);
+                Aeb(double ttc_final, double ttc_mid, double ttc_start);
+                // double TTC_final_threshold, min_angle , max_angle;
+                bool should_brake(const sensor_msgs::msg::LaserScan::ConstSharedPtr scan_msg, const nav_msgs::msg::Odometry::ConstSharedPtr odom_msg , double min_angle , double max_angle);
+                void setTtcFinal(double value)
+                {
+                    ttc_final_threshold_ = value;
+                }
+                double getTtcFinal()
+                {
+                    return ttc_final_threshold_;
+                }
+            private:
+                geometry_msgs::msg::Twist brake_msg_;
+                geometry_msgs::msg::Twist input_vel_;
 
-        class AEB
-        {
-        public:
-            AEB();
-            
-            bool shouldBerak(const sensor_msgs::msg::LaserScan::ConstSharedPtr scan_msg, const nav_msgs::msg::Odometry::ConstSharedPtr odom_msg);
-            {
-                // laser filtering
-                computeAEB();
-            }
-            double computeAEB(double desire, double actual, double dt, double min, double max);
-            ~AEB();
-        private:
-            double odom_x;
-            double odom_y;
-            scan
-            bool should_break_;
-            
-        };
-        AEB::AEB() : 
-        {
-            //RCLCPP_INFO(rclcpp::get_logger("\033[1;33mPID\033[1;0m"), ": \033[1;32mKp : %.4f\033[1;0m", this->kp_); 
-            //RCLCPP_INFO(rclcpp::get_logger("\033[1;33mPID\033[1;0m"), ": \033[1;32mKi : %.4f\033[1;0m", this->ki_); 
-            //RCLCPP_INFO(rclcpp::get_logger("\033[1;33mPID\033[1;0m"), ": \033[1;32mKd : %.4f\033[1;0m", this->kd_); 
-        }
-        double AEB::computeAEB()
-        {
-            
-            return pidTerm;
-        }
-        AEB::~AEB() {}
+                std_msgs::msg::Bool brake_status_;
+                double ttc_final_threshold_;
+                double ttc_mid_threshold_;
+                double ttc_start_threshold_;
+                double odom_velocity_x_ = 0.0;
+                double odom_velocity_y_ = 0.0;
+                bool should_brake_;
+       };
+
     };
-}
-#endif 
+
+};
+#endif // ROM_DYNAMICS_AEB

@@ -5,7 +5,7 @@ root: ~/
 
 pre_window: export PS1=" \[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;45m\]>>>\[$(tput sgr0)\] \[$(tput sgr0)\]"
 
-startup_window: BehaviorTree
+startup_window: AES_Break
 # startup_pane: 0
 
 windows:
@@ -16,11 +16,11 @@ windows:
   - AES_Break: 
       root: ~/
       panes:
-        - clear; source ~/.bashrc; ros2 run rom2109_race aes_run --ros-args -p ttc_final:=1.0
+        - clear; source ~/.bashrc; ros2 run rom2109_race linear_run
   - RUN: 
       root: ~/
       panes:
-        - clear; source ~/.bashrc; ros2 run rom2109_race linear_run --ros-args -p linear_speed:=2.0
+        - clear; source ~/.bashrc; 
   - PID: 
       root: ~/
       panes:
@@ -28,4 +28,4 @@ windows:
   - CLI: 
       root: ~/
       panes:
-        - clear; source ~/.bashrc; gnome-terminal -- ros2 run teleop_twist_keyboard teleop_twist_keyboard /cmd_vel:=/cmd_vel_keyboard
+        - clear; source ~/.bashrc; #gnome-terminal -- ros2 run teleop_twist_keyboard teleop_twist_keyboard /cmd_vel:=/cmd_vel_keyboard
