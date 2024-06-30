@@ -33,8 +33,8 @@ private:
     rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr laser_sub_;
     rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr odom_sub_;
     int count_;
-    geometry_msgs::msg::Twist msg;
-    geometry_msgs::msg::Twist::SharedPtr msg_ptr;
+    geometry_msgs::msg::Twist msg_;
+    geometry_msgs::msg::Twist::SharedPtr msg_ptr_;
 
     double odom_velocity_x_;
     double odom_velocity_y_;
@@ -60,10 +60,10 @@ LinearPublisher::LinearPublisher() : Node("linear_publisher"), count_(0)
     laser_sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>(scan_topic, 10, std::bind(&LinearPublisher::scan_callback, this, std::placeholders::_1));
     odom_sub_ = this->create_subscription<nav_msgs::msg::Odometry>(odom_topic, 10, std::bind(&LinearPublisher::odom_callback, this, std::placeholders::_1));
 
-    timer_ = this->create_wall_timer(100ms, std::bind(&LinearPublisher::timer_callback, this));
+    timer_ = this->create_wall_timer(500ms, std::bind(&LinearPublisher::timer_callback, this));
 
-    msg.linear.x = 0.0;
-    msg.angular.z = 0.0;
+    msg_.linear.x = 0.0;
+    msg_.angular.z = 0.0;
 
     odom_velocity_x_ = 0.0;
     odom_velocity_y_ = 0.0;
@@ -81,37 +81,40 @@ void LinearPublisher::timer_callback()
     // auto input_scan = std::make_shared<sensor_msgs::msg::LaserScan>(*scan_msg_);
     // auto input_odom = std::make_shared<nav_msgs::msg::Odometry>(*odom_msg_);
 
-    double min_angle = this->get_parameter("min_angle").as_double();
-    double max_angle = this->get_parameter("max_angle").as_double();
+    //double min_angle = this->get_parameter("min_angle").as_double();
+    //ouble max_angle = this->get_parameter("max_angle").as_double();
 
-    double ttc_threshold = 1.0;
-    ttc_threshold = this->get_parameter("ttc_final").as_double(); // seconds // please try default value
-
-    rom_dynamics::vechicle::Aeb rom_aeb(ttc_threshold);
-
-    bool flag = rom_aeb.should_brake(scan_msg_, odom_msg_, min_angle, max_angle);
-
-    if (flag == true)
-    {
-        msg.linear.x -= 0.01; if (msg.linear.x <= 0 ){ msg.linear.x = 0;}
-        twist_publisher_->publish(msg);
-        RCLCPP_INFO(rclcpp::get_logger("\033[1;36mBraking\033[1;0m"), ": \033[1;36m%.4f m/s\033[1;0m", msg.linear.x);
-    }
-    else
-    {
-        //double linear_speed = this->get_parameter("linear_speed").as_double();
-        //msg.linear.x = linear_speed;
-        twist_publisher_->publish(msg);
-        RCLCPP_INFO(rclcpp::get_logger("\033[1;36mLinear Velocity\033[1;0m"), ": \033[1;36m%.4f m/s\033[1;0m", msg.linear.x);
-    }
-    RCLCPP_INFO(rclcpp::get_logger("\033[1;34mTTC\033[1;0m"), ": \033[1;34m%.4f second\033[1;0m", rom_aeb.getMinTtc());
-    RCLCPP_INFO(rclcpp::get_logger("\033[1;37mdistance\033[1;0m"), ": \033[1;37m%.4f second\033[1;0m", rom_aeb.getDistance());
-    RCLCPP_INFO(rclcpp::get_logger("\033[1;38mvelocity\033[1;0m"), ": \033[1;38m%.4f second\033[1;0m", rom_aeb.getVelocity());
+    
+    //RCLCPP_INFO(rclcpp::get_logger("\033[1;34mTTC\033[1;0m"), ": \033[1;34m%.4f second\033[1;0m", rom_aeb.getMinTtc());
+    //RCLCPP_INFO(rclcpp::get_logger("\033[1;37mdistance\033[1;0m"), ": \033[1;37m%.4f second\033[1;0m", rom_aeb.getDistance());
+    //RCLCPP_INFO(rclcpp::get_logger("\033[1;38mvelocity\033[1;0m"), ": \033[1;38m%.4f second\033[1;0m", rom_aeb.getVelocity());
 }
 
 void LinearPublisher::scan_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
 {
     scan_msg_ = msg;
+    if (!odom_msg_) { return; }
+
+    double ttc_threshold = this->get_parameter("ttc_final").as_double(); // seconds // please try default value
+
+    rom_dynamics::vechicle::Aeb rom_aeb(ttc_threshold);
+
+    bool flag = rom_aeb.should_brake(scan_msg_, odom_msg_, min_angle_, max_angle_);
+
+    if (flag == true)
+    {
+        msg_.linear.x -= 0.01; if (msg_.linear.x <= 0 ){ msg_.linear.x = 0;}
+        twist_publisher_->publish(msg_);
+        RCLCPP_INFO(rclcpp::get_logger("\033[1;36mBraking\033[1;0m"), ": \033[1;36m%.4f m/s\033[1;0m", msg.linear.x);
+    }
+    else
+    {
+        double linear_speed = this->get_parameter("linear_speed").as_double();
+        msg_.linear.x = linear_speed;
+        twist_publisher_->publish(msg_);
+        RCLCPP_INFO(rclcpp::get_logger("\033[1;36mLinear Velocity\033[1;0m"), ": \033[1;36m%.4f m/s\033[1;0m", msg.linear.x);
+    }
+
 }
 
 void LinearPublisher::odom_callback(const nav_msgs::msg::Odometry::SharedPtr msg)
