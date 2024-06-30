@@ -24,11 +24,11 @@ namespace rom_dynamics
                 Aeb(double ttc_final, double ttc_mid, double ttc_start);
                 // double TTC_final_threshold, min_angle , max_angle;
                 bool should_brake(const sensor_msgs::msg::LaserScan::ConstSharedPtr scan_msg, const nav_msgs::msg::Odometry::ConstSharedPtr odom_msg , double min_angle , double max_angle);
-                void setTtcFinal(double value)
+                void setTtcFinalThreshold(double value)
                 {
                     ttc_final_threshold_ = value;
                 }
-                double getTtcFinal()
+                double getTtcFinalThreshold()
                 {
                     return ttc_final_threshold_;
                 }

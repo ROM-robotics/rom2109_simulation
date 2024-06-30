@@ -9,3 +9,7 @@ twist_mux:
         topic: cmd_vel_keyboard
         timeout: 0.5
         priority: 10
+      vff: 
+        topic: cmd_vel_vff
+        timeout: 0.5
+        priority: 10

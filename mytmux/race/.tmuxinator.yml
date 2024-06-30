@@ -5,7 +5,7 @@ root: ~/
 
 pre_window: export PS1=" \[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;45m\]>>>\[$(tput sgr0)\] \[$(tput sgr0)\]"
 
-startup_window: AES_Break
+startup_window: AES
 # startup_pane: 0
 
 windows:
@@ -13,19 +13,19 @@ windows:
       root: ~/
       panes:
         - clear; source ~/.bashrc; ros2 launch rom2109_gazebo simulation_race.launch.py open_rviz:=False use_sim_time:=True
-  - AES_Break: 
+  - AES: 
       root: ~/
       panes:
-        - clear; source ~/.bashrc; ros2 run rom2109_race linear_run
-  - RUN: 
+        - clear; source ~/.bashrc; #ros2 run rom2109_race linear_run
+  - VFF: 
       root: ~/
       panes:
-        - clear; source ~/.bashrc; ros2 run teleop_twist_keyboard teleop_twist_keyboard /cmd_vel:=/cmd_vel_keyboard
-  - PID: 
+        - clear; source ~/.bashrc; ros2 run rom2109_race avoidance_vff --ros-args -r input_scan:=/scan -r output_vel:=/cmd_vel_vff -p use_sim_time:=true
+  - Key: 
       root: ~/
       panes:
-        - clear; source ~/.bashrc; 
-  - CLI: 
+        - clear; source ~/.bashrc; #gnome-terminal -- ros2 run teleop_twist_keyboard teleop_twist_keyboard /cmd_vel:=/cmd_vel_keyboard
+  - Rviz: 
       root: ~/
       panes:
         - clear; source ~/.bashrc; #gnome-terminal -- ros2 run teleop_twist_keyboard teleop_twist_keyboard /cmd_vel:=/cmd_vel_keyboard

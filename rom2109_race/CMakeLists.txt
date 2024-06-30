@@ -12,7 +12,9 @@ find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(nav_msgs REQUIRED)
+find_package(visualization_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(ament_cmake_gtest REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -30,20 +32,19 @@ include_directories(
   include
 )
 
+#add_library(${PROJECT_NAME} SHARED src/AvoidanceNode.cpp)
+#ament_target_dependencies(${PROJECT_NAME} ${dependencies})
+
 add_executable(linear_run src/linear.cpp src/rom_aeb.cpp)
 ament_target_dependencies(linear_run rclcpp geometry_msgs nav_msgs sensor_msgs std_msgs)
 
-#add_executable(aes_run src/aes.cpp)
-#ament_target_dependencies(aes_run rclcpp geometry_msgs nav_msgs sensor_msgs std_msgs)
-
-#add_executable(test_code src/test.cpp)
-#ament_target_dependencies(test_code rclcpp geometry_msgs nav_msgs sensor_msgs std_msgs)
+add_executable(avoidance_vff src/AvoidanceMain.cpp src/AvoidanceNode.cpp)
+ament_target_dependencies(avoidance_vff rclcpp visualization_msgs geometry_msgs nav_msgs sensor_msgs std_msgs)
 
 # Install Cpp executables
 install(TARGETS
   linear_run
-#  aes_run
-#  test_code
+  avoidance_vff
   DESTINATION lib/${PROJECT_NAME})
 
 install(

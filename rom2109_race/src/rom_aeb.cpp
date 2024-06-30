@@ -72,7 +72,8 @@ bool rom_dynamics::vehicle::Aeb::should_brake(const sensor_msgs::msg::LaserScan:
     if (min_ttc_ <= ttc_final_threshold_)
     {
         should_brake_ = true;
-    } else 
+    } 
+    else 
     { 
         should_brake_ = false; 
     }
