@@ -68,7 +68,7 @@ LinearPublisher::LinearPublisher() : Node("linear_publisher"), count_(0)
     odom_velocity_x_ = 0.0;
     odom_velocity_y_ = 0.0;
     double linear_speed = this->get_parameter("linear_speed").as_double();
-    msg.linear.x = linear_speed;
+    msg_.linear.x = linear_speed;
 }
 
 void LinearPublisher::timer_callback()
@@ -105,14 +105,14 @@ void LinearPublisher::scan_callback(const sensor_msgs::msg::LaserScan::SharedPtr
     {
         msg_.linear.x -= 0.01; if (msg_.linear.x <= 0 ){ msg_.linear.x = 0;}
         twist_publisher_->publish(msg_);
-        RCLCPP_INFO(rclcpp::get_logger("\033[1;36mBraking\033[1;0m"), ": \033[1;36m%.4f m/s\033[1;0m", msg.linear.x);
+        RCLCPP_INFO(rclcpp::get_logger("\033[1;36mBraking\033[1;0m"), ": \033[1;36m%.4f m/s\033[1;0m", msg_.linear.x);
     }
     else
     {
         double linear_speed = this->get_parameter("linear_speed").as_double();
-        msg_.linear.x = linear_speed;
+        msg_.linear.x = 1.0000;
         twist_publisher_->publish(msg_);
-        RCLCPP_INFO(rclcpp::get_logger("\033[1;36mLinear Velocity\033[1;0m"), ": \033[1;36m%.4f m/s\033[1;0m", msg.linear.x);
+        RCLCPP_INFO(rclcpp::get_logger("\033[1;36mLinear Velocity\033[1;0m"), ": \033[1;36m%.4f m/s\033[1;0m", msg_.linear.x);
     }
 
 }
