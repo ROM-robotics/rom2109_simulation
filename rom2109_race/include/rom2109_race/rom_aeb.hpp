@@ -14,7 +14,7 @@
 
 namespace rom_dynamics
 {
-    namespace vechicle
+    namespace vehicle
     {
         class Aeb
         {
@@ -38,6 +38,7 @@ namespace rom_dynamics
                 }
                 double getDistance() { return distance_; }
                 double getVelocity() { return velocity_; }
+                
             private:
                 geometry_msgs::msg::Twist brake_msg_;
                 geometry_msgs::msg::Twist input_vel_;

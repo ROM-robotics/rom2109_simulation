@@ -2,20 +2,20 @@
 
 using namespace std::chrono_literals;
 
-rom_dynamics::vechicle::Aeb::Aeb()
+rom_dynamics::vehicle::Aeb::Aeb()
 {
     ttc_final_threshold_ = 1.0;
     min_ttc_ = 1000000.0;
 }
-rom_dynamics::vechicle::Aeb::Aeb(double ttc_final)
+rom_dynamics::vehicle::Aeb::Aeb(double ttc_final)
 {
     ttc_final_threshold_ = ttc_final;
     min_ttc_ = 1000000.0;
 }
 
-bool rom_dynamics::vechicle::Aeb::should_brake(const sensor_msgs::msg::LaserScan::ConstSharedPtr scan_msg, const nav_msgs::msg::Odometry::ConstSharedPtr odom_msg , double min_angle , double max_angle)
+bool rom_dynamics::vehicle::Aeb::should_brake(const sensor_msgs::msg::LaserScan::ConstSharedPtr scan_msg, const nav_msgs::msg::Odometry::ConstSharedPtr odom_msg , double min_angle , double max_angle)
 {
-    double velocity_x = odom_msg->twist.twist.linear.x;
+    odom_velocity_x_ = odom_msg->twist.twist.linear.x;
 
     //LASER ANGLE FILTER 
     auto const filtered_scan = std::make_shared<sensor_msgs::msg::LaserScan>(*scan_msg);
@@ -49,28 +49,32 @@ bool rom_dynamics::vechicle::Aeb::should_brake(const sensor_msgs::msg::LaserScan
         }
 
         double angle = filtered_scan->angle_min + filtered_scan->angle_increment * (double)i; 
+
         // base frame ရဲ့ velocity x နဲ့ အတူ laser_range ကို velocity အပြိုင်ပေးခြင်း
         // distance ကို ရှိတ်တဲ့ velocity တန်ဖိုးကို cos တွက်ပြီး weight အနေနဲ့သုံးတယ်။
-        double distance_derivative = cos(angle) * velocity_x;    
+        double distance_derivative = cos(angle) * odom_velocity_x_;    
         
         // v = s/t , t = s/v
         // velocity 0 ထက်ကြီးပြီး time( obstacle ဆီရောက်မည့်အချိန် ) က minttc ထက်ငယ်ရင် 
-        if (distance_derivative >= 0 && (distance/distance_derivative) < min_ttc_) 
+        if (distance_derivative > 0 && (distance/distance_derivative) < min_ttc_) 
         {   //  min_ttc_ ကို လျော့
-            //min_ttc_ = distance / std::max(distance_derivative, 0.001); // max() သုံးတာက  0.001 ထက်မငယ်စေဖို့
-            if(distance_derivative == 0) { min_ttc_ = min_ttc_; }
-            else { min_ttc_ = (distance / distance_derivative); }
+            min_ttc_ = distance / std::max(distance_derivative, 0.001); // max() သုံးတာက  0.001 ထက်မငယ်စေဖို့
+            //if(distance_derivative == 0) { min_ttc_ = min_ttc_; }
+            //else { min_ttc_ = (distance / distance_derivative); }
         }
-
-        // တကြောင်းထဲတွက်
-        // if (distance/std::max(velocity_x * cos(filtered_scan->angle_min + (double)i * scan_msg->angle_increment),0.001) < ttc;
         distance_ = distance;
         velocity_ = distance_derivative;
-
     }
+    RCLCPP_INFO(rclcpp::get_logger("\033[1;34mmin_ttc_\033[1;0m"), ": \033[1;34m%.4f second\033[1;0m", min_ttc_);
+    RCLCPP_INFO(rclcpp::get_logger("\033[1;36mdistance_\033[1;0m"), ": \033[1;36m%.4f meter\033[1;0m", distance_);
+    RCLCPP_INFO(rclcpp::get_logger("\033[1;36mvelocity_\033[1;0m"), ": \033[1;36m%.4f ms\033[1;0m", velocity_);
+
     if (min_ttc_ <= ttc_final_threshold_)
     {
         should_brake_ = true;
+    } else 
+    { 
+        should_brake_ = false; 
     }
 
     return should_brake_;
